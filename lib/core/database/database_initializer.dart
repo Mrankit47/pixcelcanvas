@@ -1,11 +1,22 @@
-import 'package:pixelcanvas/core/database/isar_database.dart';
+import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pixelcanvas/core/database/collection_registry.dart';
+import 'package:pixelcanvas/core/database/migration_manager.dart';
 
-/// Database initialization and directory resolution runner per Blueprint §11.2.
-///
-/// Purpose: Resolves application storage directory and opens Isar database during app bootstrap.
-/// Responsibilities: Environment validation, path resolution, and schema registration.
-/// Future Implementation Notes: Executed in `bootstrap.dart` Step 6 during application startup.
+/// Initializes the local Isar database engine during app startup per Blueprint §5.2 & §11.2.
 abstract final class DatabaseInitializer {
-  /// Resolves storage path and opens local [IsarDatabase] instance.
-  static Future<IsarDatabase?> initialize() async => null;
+  /// Opens the Isar database instance.
+  static Future<Isar> initialize() async {
+    final dir = await getApplicationDocumentsDirectory();
+    
+    final isar = await Isar.open(
+      CollectionRegistry.schemas,
+      directory: dir.path,
+      name: 'pixelcanvas_local_db',
+    );
+
+    await MigrationManager.performMigrations(isar);
+
+    return isar;
+  }
 }

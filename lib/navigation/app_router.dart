@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pixelcanvas/features/auth/presentation/auth_screen.dart';
+import 'package:pixelcanvas/features/community/presentation/community_screen.dart';
+import 'package:pixelcanvas/features/editor/presentation/editor_screen.dart';
+import 'package:pixelcanvas/features/home/presentation/home_screen.dart';
+import 'package:pixelcanvas/features/home/presentation/widgets/bottom_navigation_shell.dart';
+import 'package:pixelcanvas/features/onboarding/presentation/onboarding_screen.dart';
+import 'package:pixelcanvas/features/profile/presentation/profile_screen.dart';
+import 'package:pixelcanvas/features/projects/presentation/projects_screen.dart';
+import 'package:pixelcanvas/features/splash/presentation/splash_screen.dart';
+import 'package:pixelcanvas/features/templates/presentation/templates_screen.dart';
 import 'package:pixelcanvas/navigation/navigation_observer.dart';
 import 'package:pixelcanvas/navigation/route_constants.dart';
 import 'package:pixelcanvas/navigation/route_names.dart';
@@ -19,29 +29,34 @@ abstract final class AppRouter {
       GoRoute(
         path: RoutePaths.splash,
         name: RouteNames.splash,
-        builder: (context, state) => const _PlaceholderScreen(title: 'Splash'),
+        builder: (context, state) => const SplashScreen(),
       ),
 
       // ── 2. Onboarding Flow Route ──
       GoRoute(
         path: RoutePaths.onboarding,
         name: RouteNames.onboarding,
-        builder: (context, state) =>
-            const _PlaceholderScreen(title: 'Onboarding'),
+        builder: (context, state) => const OnboardingScreen(),
       ),
 
       // ── 3. Authentication Screen Route ──
       GoRoute(
         path: RoutePaths.auth,
         name: RouteNames.auth,
-        builder: (context, state) =>
-            const _PlaceholderScreen(title: 'Authentication'),
+        builder: (context, state) => const AuthScreen(),
       ),
 
       // ── 4. Stateful Shell Route (Bottom Navigation Shell §7.1) ──
       StatefulShellRoute.indexedStack(
-        builder: (context, state, navigationShell) => _BottomNavShellPlaceholder(
-          navigationShell: navigationShell,
+        builder: (context, state, navigationShell) => BottomNavigationShell(
+          currentIndex: navigationShell.currentIndex,
+          onDestinationSelected: (index) {
+            navigationShell.goBranch(
+              index,
+              initialLocation: index == navigationShell.currentIndex,
+            );
+          },
+          child: navigationShell,
         ),
         branches: <StatefulShellBranch>[
           // Tab 0: Home
@@ -51,8 +66,7 @@ abstract final class AppRouter {
               GoRoute(
                 path: RoutePaths.home,
                 name: RouteNames.home,
-                builder: (context, state) =>
-                    const _PlaceholderScreen(title: 'Home Screen'),
+                builder: (context, state) => const HomeScreen(),
               ),
             ],
           ),
@@ -64,8 +78,7 @@ abstract final class AppRouter {
               GoRoute(
                 path: RoutePaths.templates,
                 name: RouteNames.templates,
-                builder: (context, state) =>
-                    const _PlaceholderScreen(title: 'Templates Library'),
+                builder: (context, state) => const TemplatesScreen(),
               ),
             ],
           ),
@@ -77,8 +90,7 @@ abstract final class AppRouter {
               GoRoute(
                 path: RoutePaths.community,
                 name: RouteNames.community,
-                builder: (context, state) =>
-                    const _PlaceholderScreen(title: 'Community Gallery'),
+                builder: (context, state) => const CommunityScreen(),
               ),
             ],
           ),
@@ -90,8 +102,7 @@ abstract final class AppRouter {
               GoRoute(
                 path: RoutePaths.profile,
                 name: RouteNames.profile,
-                builder: (context, state) =>
-                    const _PlaceholderScreen(title: 'User Profile'),
+                builder: (context, state) => const ProfileScreen(),
               ),
             ],
           ),
@@ -105,7 +116,7 @@ abstract final class AppRouter {
         parentNavigatorKey: RouteConstants.rootNavigatorKey,
         builder: (context, state) {
           final id = state.pathParameters['id'] ?? 'new';
-          return _PlaceholderScreen(title: 'Pixel Canvas Editor (ID: $id)');
+          return EditorScreen(projectId: id);
         },
       ),
 
@@ -113,8 +124,7 @@ abstract final class AppRouter {
       GoRoute(
         path: RoutePaths.projects,
         name: RouteNames.projects,
-        builder: (context, state) =>
-            const _PlaceholderScreen(title: 'Projects List'),
+        builder: (context, state) => const ProjectsScreen(),
       ),
 
       // ── 7. Notifications Center Route ──
@@ -158,49 +168,6 @@ class _PlaceholderScreen extends StatelessWidget {
             title,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-        ),
-      );
-}
-
-/// Placeholder bottom navigation shell widget for [StatefulShellRoute].
-class _BottomNavShellPlaceholder extends StatelessWidget {
-  const _BottomNavShellPlaceholder({required this.navigationShell});
-
-  final StatefulNavigationShell navigationShell;
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        body: navigationShell,
-        bottomNavigationBar: NavigationBar(
-          selectedIndex: navigationShell.currentIndex,
-          onDestinationSelected: (index) {
-            navigationShell.goBranch(
-              index,
-              initialLocation: index == navigationShell.currentIndex,
-            );
-          },
-          destinations: const [
-            NavigationDestination(
-              icon: Icon(Icons.home_outlined),
-              selectedIcon: Icon(Icons.home_rounded),
-              label: 'Home',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.grid_view_outlined),
-              selectedIcon: Icon(Icons.grid_view_rounded),
-              label: 'Templates',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.explore_outlined),
-              selectedIcon: Icon(Icons.explore_rounded),
-              label: 'Community',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.person_outlined),
-              selectedIcon: Icon(Icons.person_rounded),
-              label: 'Profile',
-            ),
-          ],
         ),
       );
 }
