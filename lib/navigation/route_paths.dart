@@ -30,6 +30,9 @@ abstract final class RoutePaths {
   /// Canvas editor path.
   static const String editor = '/editor/:id';
 
+  /// Helper generating editor path for a specific project ID.
+  static String editorPath(String id) => '/editor/$id';
+
   /// Notifications center path.
   static const String notifications = '/notifications';
 

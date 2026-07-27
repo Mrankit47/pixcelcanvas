@@ -1,6 +1,6 @@
 import 'package:pixelcanvas/features/project_creation/models/palette_preset.dart';
 import 'package:pixelcanvas/features/project_creation/models/template_category.dart';
-import 'package0/pixelcanvas/features/project_creation/models/template_metadata.dart';
+import 'package:pixelcanvas/features/project_creation/models/template_metadata.dart';
 import 'package:pixelcanvas/features/project_creation/models/template_preset.dart';
 
 /// Catalog of built-in templates per Blueprint §7.3.

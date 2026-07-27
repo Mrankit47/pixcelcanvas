@@ -55,7 +55,7 @@ class UserRepositoryImpl implements UserRepository {
         id: UserId('user_oauth_${provider.toLowerCase()}'),
         email: Email('oauth_$provider@pixelcanvas.app'),
         displayName: DisplayName('$provider Creator'),
-        username: Username('@$provider_creator'),
+        username: Username('@${provider.toLowerCase()}_creator'),
         isGuest: false,
         createdAt: DateTime.now(),
       );

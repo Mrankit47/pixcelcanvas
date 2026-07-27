@@ -68,7 +68,7 @@ class ProjectSerializer {
       'brushSettings': {
         'size': engine.brushSettings.size,
         'opacity': engine.brushSettings.opacity,
-        'colorHex': engine.brushSettings.color.toARGB32().toRadixString(16),
+        'colorHex': engine.session.activeColor.toARGB32().toRadixString(16),
       },
       'eraserSettings': {
         'size': engine.eraserSettings.size,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pixelcanvas/features/settings/controllers/keyboard_shortcut_manager.dart';
 import 'package:pixelcanvas/features/settings/models/shortcut_binding.dart';
-import 'package0/pixelcanvas/features/settings/models/shortcut_category.dart';
+import 'package:pixelcanvas/features/settings/models/shortcut_category.dart';
 import 'package:pixelcanvas/features/settings/presentation/widgets/shortcut_rebind_dialog.dart';
 import 'package:pixelcanvas/features/settings/services/shortcut_search_engine.dart';
 

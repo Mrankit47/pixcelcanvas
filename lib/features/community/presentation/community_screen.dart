@@ -112,7 +112,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
             ),
             const SizedBox(height: AppSpacing.xl),
             state.isLoading
-                ? const Center(child: PcLoadingIndicator())
+                ? const Center(child: PcLoading())
                 : state.artworks.isEmpty
                     ? EmptyCommunityState(
                         onExplore: () {

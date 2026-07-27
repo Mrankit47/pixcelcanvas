@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pixelcanvas/features/app_shell/controllers/workspace_manager.dart';
 import 'package:pixelcanvas/features/project_creation/controllers/template_manager.dart';
-import 'package0/pixelcanvas/features/project_creation/models/canvas_preset.dart';
+import 'package:pixelcanvas/features/project_creation/models/canvas_preset.dart';
 import 'package:pixelcanvas/features/project_creation/models/palette_preset.dart';
 import 'package:pixelcanvas/features/project_creation/models/template_preset.dart';
 import 'package:pixelcanvas/features/project_creation/presentation/template_library_view.dart';

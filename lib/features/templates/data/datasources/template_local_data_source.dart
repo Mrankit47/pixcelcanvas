@@ -20,21 +20,37 @@ class TemplateLocalDataSourceImpl implements TemplateLocalDataSource {
   TemplateLocalDataSourceImpl(this._dbService);
 
   final DatabaseService _dbService;
+  final List<TemplateModel> _inMemoryTemplates = [];
 
   @override
   Future<List<TemplateModel>> getTemplates() async {
-    return _dbService.isar.templateModels.where().findAll();
+    final isar = _dbService.isar;
+    if (isar != null) {
+      return isar.collection<TemplateModel>().where().findAll();
+    }
+    return _inMemoryTemplates;
   }
 
   @override
   Future<TemplateModel?> getTemplateByUuid(String uuid) async {
-    return _dbService.isar.templateModels.where().uuidEqualTo(uuid).findFirst();
+    final list = await getTemplates();
+    try {
+      return list.firstWhere((t) => t.uuid == uuid);
+    } catch (_) {
+      return null;
+    }
   }
 
   @override
   Future<void> saveTemplate(TemplateModel template) async {
-    await _dbService.isar.writeTxn(() async {
-      await _dbService.isar.templateModels.put(template);
-    });
+    final isar = _dbService.isar;
+    if (isar != null) {
+      await isar.writeTxn(() async {
+        await isar.collection<TemplateModel>().put(template);
+      });
+    } else {
+      _inMemoryTemplates.removeWhere((t) => t.uuid == template.uuid);
+      _inMemoryTemplates.add(template);
+    }
   }
 }

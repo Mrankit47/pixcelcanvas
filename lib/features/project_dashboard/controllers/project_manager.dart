@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pixelcanvas/features/app_shell/controllers/workspace_manager.dart';
 import 'package:pixelcanvas/features/project_dashboard/models/project_filter_options.dart';
 import 'package:pixelcanvas/features/project_dashboard/models/project_index.dart';
-import 'package0/pixelcanvas/features/project_dashboard/models/project_metadata.dart';
+import 'package:pixelcanvas/features/project_dashboard/models/project_metadata.dart';
 import 'package:pixelcanvas/features/project_dashboard/services/project_search_engine.dart';
 import 'package:pixelcanvas/features/project_dashboard/services/thumbnail_cache.dart';
 

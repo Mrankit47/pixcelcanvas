@@ -51,46 +51,40 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           children: [
             HomeHeader(
               userName: authState.user?.displayName.value ?? 'Alex Rivers',
-              userAvatarUrl: authState.user?.avatarUrl,
-              onAvatarTap: () => context.go(RoutePaths.profile),
-              onNotificationTap: () => context.push(RoutePaths.notifications),
-              onSettingsTap: () => context.push(RoutePaths.settings),
+              onSettings: () => context.push(RoutePaths.settings),
             ),
             const SizedBox(height: AppSpacing.lg),
 
             QuickActionsSection(
-              onNewCanvasTap: () => context.push(RoutePaths.editorPath('new')),
-              onBrowseTemplatesTap: () => context.go(RoutePaths.templates),
-              onImportImageTap: () => context.push(RoutePaths.editorPath('import')),
-              onJoinCommunityTap: () => context.go(RoutePaths.community),
+              onNewProject: () => context.push(RoutePaths.editorPath('new')),
+              onImportImage: () => context.push(RoutePaths.editorPath('import')),
+              onTemplates: () => context.go(RoutePaths.templates),
+              onColorPalette: () => context.go(RoutePaths.templates),
             ),
             const SizedBox(height: AppSpacing.xl),
 
             ContinueWorkingCard(
-              projectTitle: projectsState.projects.isNotEmpty
+              title: projectsState.projects.isNotEmpty
                   ? projectsState.projects.first.title
                   : 'Cyberpunk Knight 32x32',
-              lastModified: '10 mins ago',
-              canvasSize: '32 × 32 px',
-              layersCount: 4,
-              onContinueTap: () => context.push(RoutePaths.editorPath('active')),
+              onContinue: () => context.push(RoutePaths.editorPath('active')),
             ),
             const SizedBox(height: AppSpacing.xl),
 
             RecentProjectsSection(
-              onSeeAllTap: () => context.push(RoutePaths.projects),
+              onViewAll: () => context.push(RoutePaths.projects),
               onProjectTap: (index) => context.push(RoutePaths.editorPath('project_$index')),
             ),
             const SizedBox(height: AppSpacing.xl),
 
             TemplatesPreviewSection(
-              onSeeAllTap: () => context.go(RoutePaths.templates),
+              onViewAll: () => context.go(RoutePaths.templates),
               onTemplateTap: (index) => context.push(RoutePaths.editorPath('template_$index')),
             ),
             const SizedBox(height: AppSpacing.xl),
 
             CommunityPreviewSection(
-              onSeeAllTap: () => context.go(RoutePaths.community),
+              onExplore: () => context.go(RoutePaths.community),
               onArtworkTap: (index) => context.go(RoutePaths.community),
             ),
             const SizedBox(height: AppSpacing.xxl),

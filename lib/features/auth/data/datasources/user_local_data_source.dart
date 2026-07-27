@@ -21,23 +21,38 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   UserLocalDataSourceImpl(this._dbService);
 
   final DatabaseService _dbService;
+  UserModel? _inMemoryUser;
 
   @override
   Future<UserModel?> getCurrentUser() async {
-    return _dbService.isar.userModels.where().findFirst();
+    final isar = _dbService.isar;
+    if (isar != null) {
+      return isar.collection<UserModel>().where().findFirst();
+    }
+    return _inMemoryUser;
   }
 
   @override
   Future<void> saveUser(UserModel user) async {
-    await _dbService.isar.writeTxn(() async {
-      await _dbService.isar.userModels.put(user);
-    });
+    final isar = _dbService.isar;
+    if (isar != null) {
+      await isar.writeTxn(() async {
+        await isar.collection<UserModel>().put(user);
+      });
+    } else {
+      _inMemoryUser = user;
+    }
   }
 
   @override
   Future<void> deleteUser(String uuid) async {
-    await _dbService.isar.writeTxn(() async {
-      await _dbService.isar.userModels.delete(fastHash(uuid));
-    });
+    final isar = _dbService.isar;
+    if (isar != null) {
+      await isar.writeTxn(() async {
+        await isar.collection<UserModel>().delete(fastHash(uuid));
+      });
+    } else {
+      _inMemoryUser = null;
+    }
   }
 }

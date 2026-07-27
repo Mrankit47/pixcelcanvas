@@ -41,24 +41,30 @@ class AuthScreen extends ConsumerWidget {
                   const WelcomeSection(),
                   const SizedBox(height: AppSpacing.xl),
                   if (authState.isLoading)
-                    const PcLoadingOverlay(message: 'Authenticating...')
+                    const PcLoading()
                   else ...[
                     SignInCard(
                       onSignIn: (email, password) async {
                         await ref.read(authControllerProvider.notifier).signInAsGuest();
                         if (context.mounted) context.go(RoutePaths.home);
                       },
+                      onForgotPassword: () {},
+                      onGoogleSignIn: () {},
+                      onGitHubSignIn: () {},
                     ),
                     const SizedBox(height: AppSpacing.lg),
                     GuestModeCard(
-                      onContinueAsGuest: () async {
+                      onGuestMode: () async {
                         await ref.read(authControllerProvider.notifier).signInAsGuest();
                         if (context.mounted) context.go(RoutePaths.home);
                       },
                     ),
                   ],
                   const SizedBox(height: AppSpacing.xl),
-                  const TermsSection(),
+                  TermsSection(
+                    onTermsOfService: () {},
+                    onPrivacyPolicy: () {},
+                  ),
                 ],
               ),
             ),

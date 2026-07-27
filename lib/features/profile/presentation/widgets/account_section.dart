@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pixelcanvas/features/profile/presentation/widgets/settings_tile.dart';
 import 'package:pixelcanvas/shared/widgets/pc_card.dart';
 import 'package:pixelcanvas/theme/app_colors.dart';
+import 'package:pixelcanvas/theme/app_radius.dart';
 import 'package:pixelcanvas/theme/app_spacing.dart';
 import 'package:pixelcanvas/theme/app_typography.dart';
 
@@ -64,7 +65,7 @@ class AccountSection extends StatelessWidget {
                   subtitle: subscriptionPlan,
                   trailing: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: AppColors.primary100,
                       borderRadius: AppRadius.borderFull,
                     ),

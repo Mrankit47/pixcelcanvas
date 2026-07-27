@@ -24,28 +24,61 @@ class ProjectLocalDataSourceImpl implements ProjectLocalDataSource {
   ProjectLocalDataSourceImpl(this._dbService);
 
   final DatabaseService _dbService;
+  final List<ProjectModel> _inMemoryProjects = [];
 
   @override
   Future<List<ProjectModel>> getProjects() async {
-    return _dbService.isar.projectModels.where().sortByUpdatedAtDesc().findAll();
+    final isar = _dbService.isar;
+    if (isar != null) {
+      final list = await isar.collection<ProjectModel>().where().findAll();
+      list.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+      return list;
+    }
+    final list = List<ProjectModel>.from(_inMemoryProjects);
+    list.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+    return list;
   }
 
   @override
   Future<ProjectModel?> getProjectByUuid(String uuid) async {
-    return _dbService.isar.projectModels.where().uuidEqualTo(uuid).findFirst();
+    final isar = _dbService.isar;
+    if (isar != null) {
+      final list = await isar.collection<ProjectModel>().where().findAll();
+      try {
+        return list.firstWhere((p) => p.uuid == uuid);
+      } catch (_) {
+        return null;
+      }
+    }
+    try {
+      return _inMemoryProjects.firstWhere((p) => p.uuid == uuid);
+    } catch (_) {
+      return null;
+    }
   }
 
   @override
   Future<void> saveProject(ProjectModel project) async {
-    await _dbService.isar.writeTxn(() async {
-      await _dbService.isar.projectModels.put(project);
-    });
+    final isar = _dbService.isar;
+    if (isar != null) {
+      await isar.writeTxn(() async {
+        await isar.collection<ProjectModel>().put(project);
+      });
+    } else {
+      _inMemoryProjects.removeWhere((p) => p.uuid == project.uuid);
+      _inMemoryProjects.add(project);
+    }
   }
 
   @override
   Future<void> deleteProject(String uuid) async {
-    await _dbService.isar.writeTxn(() async {
-      await _dbService.isar.projectModels.delete(fastHash(uuid));
-    });
+    final isar = _dbService.isar;
+    if (isar != null) {
+      await isar.writeTxn(() async {
+        await isar.collection<ProjectModel>().delete(fastHash(uuid));
+      });
+    } else {
+      _inMemoryProjects.removeWhere((p) => p.uuid == uuid);
+    }
   }
 }

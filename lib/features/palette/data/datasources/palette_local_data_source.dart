@@ -17,16 +17,26 @@ class PaletteLocalDataSourceImpl implements PaletteLocalDataSource {
   PaletteLocalDataSourceImpl(this._dbService);
 
   final DatabaseService _dbService;
+  final List<PaletteModel> _inMemoryPalettes = [];
 
   @override
   Future<List<PaletteModel>> getPalettes() async {
-    return _dbService.isar.paletteModels.where().findAll();
+    final isar = _dbService.isar;
+    if (isar != null) {
+      return isar.collection<PaletteModel>().where().findAll();
+    }
+    return _inMemoryPalettes;
   }
 
   @override
   Future<void> savePalette(PaletteModel palette) async {
-    await _dbService.isar.writeTxn(() async {
-      await _dbService.isar.paletteModels.put(palette);
-    });
+    final isar = _dbService.isar;
+    if (isar != null) {
+      await isar.writeTxn(() async {
+        await isar.collection<PaletteModel>().put(palette);
+      });
+    } else {
+      _inMemoryPalettes.add(palette);
+    }
   }
 }

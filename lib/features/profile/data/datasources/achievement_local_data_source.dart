@@ -17,16 +17,26 @@ class AchievementLocalDataSourceImpl implements AchievementLocalDataSource {
   AchievementLocalDataSourceImpl(this._dbService);
 
   final DatabaseService _dbService;
+  final List<AchievementModel> _inMemoryAchievements = [];
 
   @override
   Future<List<AchievementModel>> getAchievements() async {
-    return _dbService.isar.achievementModels.where().findAll();
+    final isar = _dbService.isar;
+    if (isar != null) {
+      return isar.collection<AchievementModel>().where().findAll();
+    }
+    return _inMemoryAchievements;
   }
 
   @override
   Future<void> saveAchievement(AchievementModel achievement) async {
-    await _dbService.isar.writeTxn(() async {
-      await _dbService.isar.achievementModels.put(achievement);
-    });
+    final isar = _dbService.isar;
+    if (isar != null) {
+      await isar.writeTxn(() async {
+        await isar.collection<AchievementModel>().put(achievement);
+      });
+    } else {
+      _inMemoryAchievements.add(achievement);
+    }
   }
 }

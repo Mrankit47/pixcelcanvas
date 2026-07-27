@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:pixelcanvas/features/editor/engine/animation/models/animation_clip.dart';
 import 'package:pixelcanvas/features/editor/engine/animation/models/animation_settings.dart';
-import 'package0/pixelcanvas/features/editor/engine/animation/renderers/onion_skin_renderer.dart';
+import 'package:pixelcanvas/features/editor/engine/animation/renderers/onion_skin_renderer.dart';
 
 /// Static renderer for active animation frames and onion skin overlays.
 ///

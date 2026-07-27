@@ -1,11 +1,13 @@
+import 'dart:typed_data';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pixelcanvas/features/editor/engine/animation/models/animation_frame.dart';
 import 'package:pixelcanvas/features/editor/engine/animation/models/loop_mode.dart';
 import 'package:pixelcanvas/features/editor/engine/canvas_engine.dart';
 import 'package:pixelcanvas/features/editor/engine/import/models/import_settings.dart';
 import 'package:pixelcanvas/features/editor/engine/models/brush_settings.dart';
-import 'package0/pixelcanvas/features/editor/engine/models/eraser_settings.dart';
+import 'package:pixelcanvas/features/editor/engine/models/eraser_settings.dart';
 import 'package:pixelcanvas/features/editor/engine/selection/models/selection_bounds.dart';
+import 'package:pixelcanvas/features/editor/engine/selection/models/selection_region.dart';
 import 'package:pixelcanvas/features/editor/engine/shapes/models/shape_settings.dart';
 import 'package:pixelcanvas/features/editor/engine/sprite_sheet/models/sprite_sheet_settings.dart';
 import 'package:pixelcanvas/features/editor/presentation/state/editor_state.dart';

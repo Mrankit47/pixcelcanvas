@@ -2,7 +2,6 @@ import 'package:isar/isar.dart';
 import 'package:pixelcanvas/core/database/isar_id_generator.dart';
 import 'package:pixelcanvas/features/palette/data/models/color_swatch_model.dart';
 
-part 'palette_model.g.dart';
 
 /// Isar Local NoSQL Collection for Palette Entity per Blueprint §6.2.
 @collection

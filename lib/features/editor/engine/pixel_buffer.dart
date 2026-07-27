@@ -20,6 +20,9 @@ class PixelBuffer {
   /// Contiguous 1D pixel list.
   final List<Pixel> _pixels;
 
+  /// Exposes read-only pixel list.
+  List<Pixel> get pixels => List.unmodifiable(_pixels);
+
   /// Reads pixel at (x, y).
   Pixel getPixel(int x, int y) {
     if (x < 0 || x >= width || y < 0 || y >= height) return Pixel.empty;
@@ -35,5 +38,14 @@ class PixelBuffer {
   /// Clears buffer to transparent empty pixels.
   void clear() {
     _pixels.fillRange(0, _pixels.length, Pixel.empty);
+  }
+
+  /// Deep copy of PixelBuffer.
+  PixelBuffer clone() {
+    final copy = PixelBuffer(width: width, height: height);
+    for (var i = 0; i < _pixels.length; i++) {
+      copy._pixels[i] = _pixels[i];
+    }
+    return copy;
   }
 }

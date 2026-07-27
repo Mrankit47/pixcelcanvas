@@ -1,6 +1,5 @@
 import 'package:isar/isar.dart';
 
-part 'settings_model.g.dart';
 
 /// Isar Local NoSQL Collection for Settings Entity per Blueprint §6.2.
 @collection

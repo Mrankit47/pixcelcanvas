@@ -3,7 +3,7 @@ import 'package:pixelcanvas/features/settings/models/appearance_settings.dart';
 import 'package:pixelcanvas/features/settings/models/autosave_settings.dart';
 import 'package:pixelcanvas/features/settings/models/editor_settings.dart';
 import 'package:pixelcanvas/features/settings/models/general_settings.dart';
-import 'package0/pixelcanvas/features/settings/models/performance_settings.dart';
+import 'package:pixelcanvas/features/settings/models/performance_settings.dart';
 import 'package:pixelcanvas/features/settings/models/shortcut_binding.dart';
 
 /// Container grouping configuration settings and shortcut bindings.

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pixelcanvas/features/project_creation/controllers/template_manager.dart';
 import 'package:pixelcanvas/features/project_creation/models/template_category.dart';
-import 'package0/pixelcanvas/features/project_creation/models/template_preset.dart';
+import 'package:pixelcanvas/features/project_creation/models/template_preset.dart';
 import 'package:pixelcanvas/features/project_creation/presentation/widgets/template_card.dart';
 import 'package:pixelcanvas/features/project_creation/presentation/widgets/template_preview_dialog.dart';
 

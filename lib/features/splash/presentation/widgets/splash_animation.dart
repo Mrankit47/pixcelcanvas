@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pixelcanvas/theme/app_curves.dart';
+import 'package:pixelcanvas/theme/app_durations.dart';
 
 /// Animation wrapper orchestrating logo scaling, floating effect, and text fade sequence.
 ///
@@ -20,16 +20,19 @@ class SplashAnimation extends StatelessWidget {
   /// Master animation controller.
   final AnimationController controller;
 
+  /// Child widget.
+  final Widget child;
+
   @override
   Widget build(BuildContext context) {
     final scaleAnimation = CurvedAnimation(
       parent: controller,
-      curve: const Interval(0.0, 0.6, curve: AppCurves.emphasize),
+      curve: Interval(0.0, 0.6, curve: AppCurves.emphasize),
     );
 
     final fadeAnimation = CurvedAnimation(
       parent: controller,
-      curve: const Interval(0.2, 0.8, curve: AppCurves.enter),
+      curve: Interval(0.2, 0.8, curve: AppCurves.enter),
     );
 
     return AnimatedBuilder(

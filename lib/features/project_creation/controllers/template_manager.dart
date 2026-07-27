@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pixelcanvas/features/project_creation/models/template_preset.dart';
-import 'package0/pixelcanvas/features/project_creation/services/template_search_engine.dart';
+import 'package:pixelcanvas/features/project_creation/services/template_search_engine.dart';
 import 'package:pixelcanvas/features/project_creation/templates/built_in_templates.dart';
 
 /// Central controller managing template CRUD operations per Blueprint §7.3.

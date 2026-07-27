@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pixelcanvas/features/settings/models/appearance_settings.dart';
-import 'package0/pixelcanvas/features/settings/models/autosave_settings.dart';
+import 'package:pixelcanvas/features/settings/models/autosave_settings.dart';
 import 'package:pixelcanvas/features/settings/models/editor_settings.dart';
 import 'package:pixelcanvas/features/settings/models/general_settings.dart';
 import 'package:pixelcanvas/features/settings/models/performance_settings.dart';

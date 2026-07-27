@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pixelcanvas/features/editor/engine/models/brush_settings.dart';
 import 'package:pixelcanvas/features/editor/presentation/controllers/editor_controller.dart';
 import 'package:pixelcanvas/features/editor/presentation/state/editor_state.dart';
 import 'package:pixelcanvas/features/editor/presentation/widgets/bottom_status_bar.dart';
@@ -9,24 +11,35 @@ import 'package:pixelcanvas/features/editor/presentation/widgets/left_toolbar.da
 import 'package:pixelcanvas/features/editor/presentation/widgets/right_inspector.dart';
 import 'package:pixelcanvas/features/editor/presentation/widgets/top_action_bar.dart';
 import 'package:pixelcanvas/theme/app_colors.dart';
+import 'package:pixelcanvas/theme/app_spacing.dart';
 
-/// Production-ready Editor Screen for PixelCanvas per Blueprint §5.1 & §6.3.
+/// Master Editor Workspace Screen integrating all sub-engines per Blueprint §5.1 & §8.2.
 ///
-/// **Purpose**: Full-screen canvas workspace reacting to [EditorController] and [CanvasEngine] state.
-/// **History Integration**: Undo/Redo buttons enabled/disabled based on [EditorState.canUndo] / [EditorState.canRedo].
+/// **Purpose**: Responsive studio workspace layout composing CanvasViewport, LeftToolbar, RightInspector, TopActionBar, and FloatingZoomControls.
 /// **Consumed Providers**: [editorControllerProvider], [canvasEngineProvider]
-class EditorScreen extends ConsumerWidget {
+class EditorScreen extends ConsumerStatefulWidget {
   /// Creates an [EditorScreen].
-  const EditorScreen({
-    this.projectId = 'new',
-    super.key,
-  });
+  const EditorScreen({this.projectId = 'new', super.key});
 
-  /// Active project ID parameter.
+  /// Active project ID.
   final String projectId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<EditorScreen> createState() => _EditorScreenState();
+}
+
+class _EditorScreenState extends ConsumerState<EditorScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      final engine = ref.read(canvasEngineProvider);
+      ref.read(editorControllerProvider.notifier).syncEngineState(engine);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final editorState = ref.watch(editorControllerProvider);
     final controller = ref.read(editorControllerProvider.notifier);
     final engine = ref.watch(canvasEngineProvider);
@@ -37,30 +50,41 @@ class EditorScreen extends ConsumerWidget {
         child: Column(
           children: [
             TopActionBar(
-              projectTitle: 'Untitled 32x32',
-              onBackTap: () => Navigator.of(context).pop(),
-              onUndoTap: editorState.canUndo
+              projectName: 'Untitled 32x32',
+              onBack: () {
+                if (context.canPop()) {
+                  context.pop();
+                } else {
+                  context.go('/home');
+                }
+              },
+              onUndo: editorState.canUndo
                   ? () {
                       engine.undo();
                       controller.updateHistoryState(engine);
                     }
                   : null,
-              onRedoTap: editorState.canRedo
+              onRedo: editorState.canRedo
                   ? () {
                       engine.redo();
                       controller.updateHistoryState(engine);
                     }
                   : null,
-              onExportTap: () {},
-              onShareTap: () {},
+              onExport: () {},
+              onShare: () {},
             ),
             Expanded(
               child: Row(
                 children: [
                   LeftToolbar(
-                    selectedToolIndex: editorState.selectedTool.index,
-                    onToolSelected: (index) {
-                      controller.selectTool(PixelTool.values[index % PixelTool.values.length]);
+                    selectedTool: editorState.selectedTool.name,
+                    onToolSelected: (toolName) {
+                      final tool = PixelTool.values.firstWhere(
+                        (t) => t.name.toLowerCase() == toolName.toLowerCase(),
+                        orElse: () => PixelTool.pencil,
+                      );
+                      controller.selectTool(tool);
+                      controller.syncEngineState(engine);
                     },
                   ),
                   Expanded(
@@ -71,27 +95,31 @@ class EditorScreen extends ConsumerWidget {
                           bottom: 16,
                           right: 16,
                           child: FloatingZoomControls(
-                            zoomLevel: editorState.zoomLevel,
-                            onZoomIn: () => controller.setZoom(editorState.zoomLevel + 0.5),
-                            onZoomOut: () => controller.setZoom(editorState.zoomLevel - 0.5),
-                            onResetZoom: () => controller.setZoom(1.0),
+                            onZoomIn: () {
+                              controller.setZoom(editorState.zoomLevel + 0.5);
+                              controller.syncEngineState(engine);
+                            },
+                            onZoomOut: () {
+                              controller.setZoom(editorState.zoomLevel - 0.5);
+                              controller.syncEngineState(engine);
+                            },
+                            onZoomReset: () {
+                              controller.setZoom(1.0);
+                              controller.syncEngineState(engine);
+                            },
                           ),
                         ),
                       ],
                     ),
                   ),
-                  RightInspector(
-                    onLayerSelected: controller.selectLayer,
-                    onColorSelected: controller.setActiveColor,
-                  ),
+                  const RightInspector(),
                 ],
               ),
             ),
             BottomStatusBar(
               cursorCoordinates: 'X: 12, Y: 18',
               canvasDimensions: '32 × 32 px',
-              zoomPercentage: '${(editorState.zoomLevel * 100).toInt()}%',
-              selectedToolName: editorState.selectedTool.name.toUpperCase(),
+              zoomLevel: '${(editorState.zoomLevel * 100).toInt()}%',
             ),
           ],
         ),

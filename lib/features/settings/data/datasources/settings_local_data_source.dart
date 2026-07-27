@@ -17,18 +17,28 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
   SettingsLocalDataSourceImpl(this._dbService);
 
   final DatabaseService _dbService;
+  SettingsModel? _inMemorySettings;
 
   @override
   Future<SettingsModel> getSettings() async {
-    final model = await _dbService.isar.settingsModels.get(1);
-    return model ?? SettingsModel();
+    final isar = _dbService.isar;
+    if (isar != null) {
+      final model = await isar.collection<SettingsModel>().get(1);
+      return model ?? SettingsModel();
+    }
+    return _inMemorySettings ?? SettingsModel();
   }
 
   @override
   Future<void> saveSettings(SettingsModel settings) async {
     settings.id = 1;
-    await _dbService.isar.writeTxn(() async {
-      await _dbService.isar.settingsModels.put(settings);
-    });
+    final isar = _dbService.isar;
+    if (isar != null) {
+      await isar.writeTxn(() async {
+        await isar.collection<SettingsModel>().put(settings);
+      });
+    } else {
+      _inMemorySettings = settings;
+    }
   }
 }

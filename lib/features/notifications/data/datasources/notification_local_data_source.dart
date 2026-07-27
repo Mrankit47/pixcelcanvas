@@ -17,16 +17,30 @@ class NotificationLocalDataSourceImpl implements NotificationLocalDataSource {
   NotificationLocalDataSourceImpl(this._dbService);
 
   final DatabaseService _dbService;
+  final List<NotificationModel> _inMemoryNotifications = [];
 
   @override
   Future<List<NotificationModel>> getNotifications() async {
-    return _dbService.isar.notificationModels.where().sortByTimestampDesc().findAll();
+    final isar = _dbService.isar;
+    if (isar != null) {
+      final list = await isar.collection<NotificationModel>().where().findAll();
+      list.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+      return list;
+    }
+    final list = List<NotificationModel>.from(_inMemoryNotifications);
+    list.sort((a, b) => b.timestamp.compareTo(a.timestamp));
+    return list;
   }
 
   @override
   Future<void> saveNotification(NotificationModel notification) async {
-    await _dbService.isar.writeTxn(() async {
-      await _dbService.isar.notificationModels.put(notification);
-    });
+    final isar = _dbService.isar;
+    if (isar != null) {
+      await isar.writeTxn(() async {
+        await isar.collection<NotificationModel>().put(notification);
+      });
+    } else {
+      _inMemoryNotifications.add(notification);
+    }
   }
 }

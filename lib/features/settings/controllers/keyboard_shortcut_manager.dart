@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pixelcanvas/features/settings/models/shortcut_binding.dart';
-import 'package0/pixelcanvas/features/settings/services/shortcut_conflict_resolver.dart';
+import 'package:pixelcanvas/features/settings/services/shortcut_conflict_resolver.dart';
 
 /// Keyboard shortcut manager coordinating custom key rebinds & conflict detection.
 class KeyboardShortcutManager extends ChangeNotifier {

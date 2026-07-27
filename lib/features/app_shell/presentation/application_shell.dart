@@ -7,7 +7,7 @@ import 'package:pixelcanvas/features/app_shell/controllers/top_toolbar_manager.d
 import 'package:pixelcanvas/features/app_shell/controllers/workspace_manager.dart';
 import 'package:pixelcanvas/features/app_shell/presentation/widgets/command_palette.dart';
 import 'package:pixelcanvas/features/app_shell/presentation/widgets/sidebar_view.dart';
-import 'package0/pixelcanvas/features/app_shell/presentation/widgets/status_bar_view.dart';
+import 'package:pixelcanvas/features/app_shell/presentation/widgets/status_bar_view.dart';
 import 'package:pixelcanvas/features/app_shell/presentation/widgets/top_toolbar_view.dart';
 
 /// Main Application Shell UI Layout per Blueprint §6.1.

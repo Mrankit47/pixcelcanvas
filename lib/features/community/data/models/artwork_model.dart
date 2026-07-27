@@ -1,7 +1,6 @@
 import 'package:isar/isar.dart';
 import 'package:pixelcanvas/core/database/isar_id_generator.dart';
 
-part 'artwork_model.g.dart';
 
 /// Isar Local NoSQL Collection for Artwork Entity per Blueprint §6.2.
 @collection
@@ -11,7 +10,7 @@ class ArtworkModel {
     this.uuid = '',
     this.authorId = '',
     this.authorName = '',
-    this.title = '',
+    this.title = '',  
     this.likesCount = 0,
     this.viewsCount = 0,
     this.isLiked = false,

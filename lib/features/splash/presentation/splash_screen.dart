@@ -36,11 +36,20 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
     // Trigger auth state initialization and handle splash navigation
     Future.microtask(() async {
-      await ref.read(authControllerProvider.notifier).loadCurrentUser();
+      bool isAuthed = false;
+      try {
+        await ref.read(authControllerProvider.notifier).loadCurrentUser();
+        isAuthed = ref.read(authControllerProvider).isAuthenticated;
+      } catch (_) {
+        isAuthed = false;
+      }
+
+      // Ensure minimum splash animation delay (1.5s) for smooth UX
+      await Future.delayed(const Duration(milliseconds: 1500));
+
       if (!mounted) return;
-      
-      final authState = ref.read(authControllerProvider);
-      if (authState.isAuthenticated) {
+
+      if (isAuthed) {
         context.go(RoutePaths.home);
       } else {
         context.go(RoutePaths.onboarding);
@@ -56,20 +65,26 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: SplashBackground(
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.xl),
-              child: Column(
-                children: [
-                  const Spacer(),
-                  SplashAnimation(
-                    controller: _animController,
-                    child: const SplashLogo(),
-                  ),
-                  const Spacer(),
-                  const SplashFooter(),
-                ],
+        body: SizedBox.expand(
+          child: SplashBackground(
+            animation: _animController,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.xl),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Spacer(),
+                    Center(
+                      child: SplashAnimation(
+                        controller: _animController,
+                        child: const SplashLogo(),
+                      ),
+                    ),
+                    const Spacer(),
+                    const SplashFooter(),
+                  ],
+                ),
               ),
             ),
           ),

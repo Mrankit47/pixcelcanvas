@@ -28,19 +28,21 @@ class SplashBackground extends StatelessWidget {
         animation: animation,
         builder: (context, _) {
           final value = animation.value;
-          return Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment(-1.0 + value * 0.5, -1.0),
-                end: Alignment(1.0 - value * 0.5, 1.0),
-                colors: const [
-                  AppColors.surface,
-                  AppColors.background,
-                  AppColors.primary50,
-                ],
+          return SizedBox.expand(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment(-1.0 + value * 0.5, -1.0),
+                  end: Alignment(1.0 - value * 0.5, 1.0),
+                  colors: const [
+                    AppColors.surface,
+                    AppColors.background,
+                    AppColors.primary50,
+                  ],
+                ),
               ),
+              child: child,
             ),
-            child: child,
           );
         },
       );

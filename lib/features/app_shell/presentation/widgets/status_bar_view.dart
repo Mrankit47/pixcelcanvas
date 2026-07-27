@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pixelcanvas/features/app_shell/controllers/status_bar_manager.dart';
-import 'package0/pixelcanvas/features/app_shell/models/project_workspace.dart';
+import 'package:pixelcanvas/features/app_shell/models/project_workspace.dart';
 
 /// Bottom Status Bar widget displaying real-time metrics and cursor coordinates.
 class StatusBarView extends StatelessWidget {

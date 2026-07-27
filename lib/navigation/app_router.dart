@@ -36,7 +36,10 @@ abstract final class AppRouter {
       GoRoute(
         path: RoutePaths.onboarding,
         name: RouteNames.onboarding,
-        builder: (context, state) => const OnboardingScreen(),
+        builder: (context, state) => OnboardingScreen(
+          onOnboardingComplete: () => context.go(RoutePaths.home),
+          onSkipComplete: () => context.go(RoutePaths.home),
+        ),
       ),
 
       // ── 3. Authentication Screen Route ──

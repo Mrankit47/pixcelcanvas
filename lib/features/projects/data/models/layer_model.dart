@@ -1,6 +1,5 @@
 import 'package:isar/isar.dart';
 
-part 'layer_model.g.dart';
 
 /// Isar Embedded Object for Layer Entity per Blueprint §6.2 & §11.2.
 ///

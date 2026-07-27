@@ -31,6 +31,7 @@ import 'package:pixelcanvas/features/editor/engine/commands/timeline_command.dar
 import 'package:pixelcanvas/features/editor/engine/commands/rotate_command.dart';
 import 'package:pixelcanvas/features/editor/engine/commands/scale_command.dart';
 import 'package:pixelcanvas/features/editor/engine/commands/transform_command.dart';
+import 'package:pixelcanvas/features/editor/engine/commands/history_command.dart';
 import 'package:pixelcanvas/features/editor/engine/drawing_session.dart';
 import 'package:pixelcanvas/features/editor/engine/eraser/eraser_renderer.dart';
 import 'package:pixelcanvas/features/editor/engine/export/export_engine.dart';
@@ -61,7 +62,7 @@ import 'package:pixelcanvas/features/editor/engine/animation/models/animation_cl
 import 'package:pixelcanvas/features/editor/engine/animation/models/animation_frame.dart';
 import 'package:pixelcanvas/features/editor/engine/animation/models/animation_settings.dart';
 import 'package:pixelcanvas/features/editor/engine/animation/models/loop_mode.dart';
-import 'package0/pixelcanvas/features/editor/engine/serialization/project_deserializer.dart';
+import 'package:pixelcanvas/features/editor/engine/serialization/project_deserializer.dart';
 import 'package:pixelcanvas/features/editor/engine/serialization/project_serializer.dart';
 import 'package:pixelcanvas/features/editor/engine/import/import_engine.dart';
 import 'package:pixelcanvas/features/editor/engine/import/models/import_preview.dart';

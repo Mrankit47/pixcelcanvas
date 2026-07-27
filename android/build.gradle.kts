@@ -20,18 +20,19 @@ subprojects {
 }
 
 subprojects {
-    val configureAction = Action<Project> {
-        if (plugins.hasPlugin("com.android.library")) {
-            val androidExt = extensions.findByType(com.android.build.gradle.LibraryExtension::class.java)
-            if (androidExt != null && androidExt.namespace == null) {
+    val configureProject = {
+        val androidExt = extensions.findByType(com.android.build.gradle.LibraryExtension::class.java)
+        if (androidExt != null) {
+            if (androidExt.namespace == null) {
                 androidExt.namespace = "com.pixelcanvas.plugin.${name.replace("-", "_")}"
             }
+            androidExt.compileSdk = 36
         }
     }
     if (state.executed) {
-        configureAction.execute(this)
+        configureProject()
     } else {
-        afterEvaluate(configureAction)
+        afterEvaluate { configureProject() }
     }
 }
 

@@ -13,9 +13,9 @@ import 'package:pixelcanvas/shared/widgets/pc_loading.dart';
 import 'package:pixelcanvas/theme/app_colors.dart';
 import 'package:pixelcanvas/theme/app_spacing.dart';
 
-/// Production-ready Projects Gallery Screen for PixelCanvas per Blueprint §5.1 & §6.3.
+/// Production-ready Projects Gallery Screen for PixelCanvas per Blueprint §5.1 & §6.2.
 ///
-/// **Purpose**: Projects gallery allowing users to browse, search, and manage projects.
+/// **Purpose**: Gallery screen reacting to [ProjectsController] state.
 /// **Consumed Providers**: [projectsControllerProvider]
 class ProjectsScreen extends ConsumerStatefulWidget {
   /// Creates a [ProjectsScreen].
@@ -39,6 +39,7 @@ class _ProjectsScreenState extends ConsumerState<ProjectsScreen> {
   void _handleSortTap() {
     ProjectsSortSheet.show(
       context,
+      selectedOption: 'Recently Edited',
       onSortSelected: (option) {},
     );
   }
@@ -61,8 +62,7 @@ class _ProjectsScreenState extends ConsumerState<ProjectsScreen> {
                 children: [
                   ProjectsHeader(
                     projectCount: state.projects.length,
-                    onNewProjectTap: () => context.push(RoutePaths.editorPath('new')),
-                    onSortTap: _handleSortTap,
+                    onCreateProject: () => context.push(RoutePaths.editorPath('new')),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   const ProjectsSearchBar(),
@@ -80,7 +80,7 @@ class _ProjectsScreenState extends ConsumerState<ProjectsScreen> {
             ),
             Expanded(
               child: state.isLoading
-                  ? const Center(child: PcLoadingIndicator())
+                  ? const Center(child: PcLoading())
                   : state.projects.isEmpty
                       ? EmptyProjectsState(
                           onCreateProject: () => context.push(RoutePaths.editorPath('new')),

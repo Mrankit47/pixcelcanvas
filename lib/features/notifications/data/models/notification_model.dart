@@ -1,7 +1,6 @@
 import 'package:isar/isar.dart';
 import 'package:pixelcanvas/core/database/isar_id_generator.dart';
 
-part 'notification_model.g.dart';
 
 /// Isar Local NoSQL Collection for NotificationItem Entity per Blueprint §6.2.
 @collection

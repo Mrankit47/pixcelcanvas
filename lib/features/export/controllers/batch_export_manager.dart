@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pixelcanvas/features/app_shell/controllers/workspace_manager.dart';
-import 'package0/pixelcanvas/features/export/models/export_preset.dart';
+import 'package:pixelcanvas/features/export/models/export_preset.dart';
 import 'package:pixelcanvas/features/export/queue/export_job.dart';
 import 'package:pixelcanvas/features/export/queue/export_queue.dart';
 

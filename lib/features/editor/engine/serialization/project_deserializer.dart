@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:pixelcanvas/features/editor/engine/animation/models/animation_clip.dart';

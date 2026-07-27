@@ -46,7 +46,8 @@ class _TemplatesScreenState extends ConsumerState<TemplatesScreen> {
   void _handlePreviewTap(int index) {
     TemplatePreviewDialog.show(
       context,
-      title: 'Starter Template #${index + 1}',
+      name: 'Starter Template #${index + 1}',
+      onUseTemplate: () {},
     );
   }
 
@@ -85,10 +86,10 @@ class _TemplatesScreenState extends ConsumerState<TemplatesScreen> {
             ),
             const SizedBox(height: AppSpacing.xl),
             state.isLoading
-                ? const Center(child: PcLoadingIndicator())
+                ? const Center(child: PcLoading())
                 : state.templates.isEmpty
                     ? EmptyTemplatesState(
-                        onExplore: () {
+                        onBrowseAll: () {
                           setState(() {
                             _selectedCategory = 'All';
                           });
@@ -99,7 +100,6 @@ class _TemplatesScreenState extends ConsumerState<TemplatesScreen> {
                         onPreview: _handlePreviewTap,
                         onUseTemplate: (index) {},
                       ),
-            const SizedBox(height: AppSpacing.xl),
           ],
         ),
       ),

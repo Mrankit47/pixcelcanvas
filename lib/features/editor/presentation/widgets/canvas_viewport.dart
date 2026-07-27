@@ -18,42 +18,75 @@ final canvasEngineProvider = Provider<CanvasEngine>((ref) {
 ///
 /// **Purpose**: Centered canvas box supporting continuous brush, pencil, eraser, fill, and eyedropper gestures.
 /// **History Integration**: Syncs [EditorController] canUndo/canRedo flags after each stroke completion.
-/// **Consumed Providers**: [editorControllerProvider], [canvasEngineProvider]
-class CanvasViewport extends ConsumerWidget {
+class CanvasViewport extends ConsumerStatefulWidget {
   /// Creates a [CanvasViewport].
   const CanvasViewport({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CanvasViewport> createState() => _CanvasViewportState();
+}
+
+class _CanvasViewportState extends ConsumerState<CanvasViewport> {
+  late final TransformationController _transformationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _transformationController = TransformationController();
+  }
+
+  @override
+  void dispose() {
+    _transformationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final editorState = ref.watch(editorControllerProvider);
     final engine = ref.watch(canvasEngineProvider);
 
     // Sync settings to engine
+    final colorHex = editorState.activeColorHex.replaceFirst('#', '');
     final activeColor = Color(
-      int.parse(editorState.activeColorHex.replaceFirst('#', '0xFF')),
+      int.parse(colorHex, radix: 16) | 0xFF000000,
     );
     engine.session.activeColor = activeColor;
     engine.session.activeTool = editorState.selectedTool;
     engine.brushSettings = editorState.brushSettings;
     engine.eraserSettings = editorState.eraserSettings;
 
+    // Synchronize zoom controller scale programmatically
+    final zoom = editorState.zoomLevel;
+    _transformationController.value = Matrix4.identity()..scale(zoom);
+
     /// Helper: sync history flags to EditorController after mutation.
     void syncHistory() {
       ref.read(editorControllerProvider.notifier).updateHistoryState(engine);
     }
 
+    // Disable InteractiveViewer gestures when actively drawing to prevent conflict
+    final isDrawingTool = editorState.selectedTool == PixelTool.pencil ||
+        editorState.selectedTool == PixelTool.brush ||
+        editorState.selectedTool == PixelTool.eraser ||
+        editorState.selectedTool == PixelTool.fill ||
+        editorState.selectedTool == PixelTool.eyedropper;
+
     return Center(
       child: InteractiveViewer(
+        transformationController: _transformationController,
         boundaryMargin: const EdgeInsets.all(200),
         minScale: 0.5,
         maxScale: 8.0,
+        panEnabled: !isDrawingTool,
+        scaleEnabled: !isDrawingTool,
         child: Container(
           width: 384,
           height: 384,
           decoration: const BoxDecoration(
             color: AppColors.surface,
             borderRadius: AppRadius.borderSm,
-            boxShadow: [AppShadows.elevationMd],
+            boxShadow: AppShadows.md,
           ),
           child: GestureDetector(
             onTapDown: (details) {
@@ -67,6 +100,13 @@ class CanvasViewport extends ConsumerWidget {
                 final sampledColor = engine.sampleColor(point.x, point.y);
                 final hex = '#${sampledColor.toARGB32().toRadixString(16).substring(2).toUpperCase()}';
                 ref.read(editorControllerProvider.notifier).setActiveColor(hex);
+              } else if (editorState.selectedTool == PixelTool.pencil ||
+                  editorState.selectedTool == PixelTool.brush) {
+                engine.plotPixel(point.x, point.y, activeColor);
+                syncHistory();
+              } else if (editorState.selectedTool == PixelTool.eraser) {
+                engine.erasePixel(point.x, point.y);
+                syncHistory();
               }
             },
             onPanStart: (details) {
