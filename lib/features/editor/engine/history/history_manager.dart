@@ -61,4 +61,7 @@ class HistoryManager {
     _undoStack.clear();
     _redoStack.clear();
   }
+
+  /// Alias for [clear].
+  void clearHistory() => clear();
 }

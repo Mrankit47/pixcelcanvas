@@ -79,6 +79,9 @@ dev_dependencies:
   # ── Unit & Integration Testing (Blueprint §20) ──
   mocktail: ^1.0.4
 
+dependency_overrides:
+  analyzer: 5.13.0
+
 flutter:
   uses-material-design: true
 

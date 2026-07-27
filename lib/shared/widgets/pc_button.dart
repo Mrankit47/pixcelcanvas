@@ -118,7 +118,7 @@ class PcButton extends StatelessWidget {
 
     Widget content = Row(
       mainAxisSize: fullWidth ? MainAxisSize.max : MainAxisSize.min,
-      main: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (isLoading) ...[
           SizedBox(

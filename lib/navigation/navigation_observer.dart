@@ -10,7 +10,7 @@ class AppNavigationObserver extends NavigatorObserver {
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPush(route, previousRoute);
     Logger.d(
-      'Route Push: ${route.settings.name ?? route.settings.path} (Previous: ${previousRoute?.settings.name})',
+      'Route Push: ${route.settings.name} (Previous: ${previousRoute?.settings.name})',
     );
   }
 
@@ -18,7 +18,7 @@ class AppNavigationObserver extends NavigatorObserver {
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPop(route, previousRoute);
     Logger.d(
-      'Route Pop: ${route.settings.name ?? route.settings.path} (New Top: ${previousRoute?.settings.name})',
+      'Route Pop: ${route.settings.name} (New Top: ${previousRoute?.settings.name})',
     );
   }
 

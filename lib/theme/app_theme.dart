@@ -207,12 +207,12 @@ abstract final class AppTheme {
           labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
           labelTextStyle: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.selected)) {
-              return AppTypography.labelSm.copyWith(
+              return AppTypography.labelSmall.copyWith(
                 color: AppColors.primary500,
                 fontWeight: FontWeight.w600,
               );
             }
-            return AppTypography.labelSm.copyWith(
+            return AppTypography.labelSmall.copyWith(
               color: AppColors.neutral300,
             );
           }),
@@ -231,8 +231,8 @@ abstract final class AppTheme {
         ),
 
         // App Bar Theme
-        appBarTheme: const AppBarThemeData(
-          height: 56,
+        appBarTheme: const AppBarTheme(
+          toolbarHeight: 56,
           backgroundColor: AppColors.surface,
           surfaceTintColor: Colors.transparent,
           elevation: AppShadows.elevationNone,
