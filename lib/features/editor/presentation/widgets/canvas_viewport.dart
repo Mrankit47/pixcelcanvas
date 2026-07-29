@@ -98,7 +98,8 @@ class _CanvasViewportState extends ConsumerState<CanvasViewport> {
                 syncHistory();
               } else if (editorState.selectedTool == PixelTool.eyedropper) {
                 final sampledColor = engine.sampleColor(point.x, point.y);
-                final hex = '#${sampledColor.toARGB32().toRadixString(16).substring(2).toUpperCase()}';
+                final argbHex = sampledColor.toARGB32().toRadixString(16).padLeft(8, '0');
+                final hex = '#${argbHex.substring(2).toUpperCase()}';
                 ref.read(editorControllerProvider.notifier).setActiveColor(hex);
               } else if (editorState.selectedTool == PixelTool.pencil ||
                   editorState.selectedTool == PixelTool.brush) {

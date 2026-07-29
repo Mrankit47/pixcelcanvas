@@ -52,7 +52,7 @@ class LeftToolbar extends StatelessWidget {
             final toolName = item['name'] as String;
             final toolIcon = item['icon'] as IconData;
             final shortcut = item['shortcut'] as String;
-            final isSelected = toolName == selectedTool;
+            final isSelected = toolName.toLowerCase() == selectedTool.toLowerCase();
 
             return Padding(
               padding: const EdgeInsets.only(bottom: AppSpacing.xs),

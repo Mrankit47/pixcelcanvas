@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pixelcanvas/features/editor/engine/models/brush_settings.dart';
 import 'package:pixelcanvas/features/editor/presentation/controllers/editor_controller.dart';
 import 'package:pixelcanvas/features/editor/presentation/state/editor_state.dart';
 import 'package:pixelcanvas/features/editor/presentation/widgets/bottom_status_bar.dart';
@@ -11,12 +10,10 @@ import 'package:pixelcanvas/features/editor/presentation/widgets/left_toolbar.da
 import 'package:pixelcanvas/features/editor/presentation/widgets/right_inspector.dart';
 import 'package:pixelcanvas/features/editor/presentation/widgets/top_action_bar.dart';
 import 'package:pixelcanvas/theme/app_colors.dart';
-import 'package:pixelcanvas/theme/app_spacing.dart';
 
 /// Master Editor Workspace Screen integrating all sub-engines per Blueprint §5.1 & §8.2.
 ///
 /// **Purpose**: Responsive studio workspace layout composing CanvasViewport, LeftToolbar, RightInspector, TopActionBar, and FloatingZoomControls.
-/// **Consumed Providers**: [editorControllerProvider], [canvasEngineProvider]
 class EditorScreen extends ConsumerStatefulWidget {
   /// Creates an [EditorScreen].
   const EditorScreen({this.projectId = 'new', super.key});
@@ -29,6 +26,8 @@ class EditorScreen extends ConsumerStatefulWidget {
 }
 
 class _EditorScreenState extends ConsumerState<EditorScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -44,8 +43,18 @@ class _EditorScreenState extends ConsumerState<EditorScreen> {
     final controller = ref.read(editorControllerProvider.notifier);
     final engine = ref.watch(canvasEngineProvider);
 
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: AppColors.neutral50,
+      endDrawer: isMobile
+          ? const Drawer(
+              width: 280,
+              child: SafeArea(child: RightInspector()),
+            )
+          : null,
       body: SafeArea(
         child: Column(
           children: [
@@ -72,6 +81,9 @@ class _EditorScreenState extends ConsumerState<EditorScreen> {
                   : null,
               onExport: () {},
               onShare: () {},
+              onSettings: isMobile
+                  ? () => _scaffoldKey.currentState?.openEndDrawer()
+                  : null,
             ),
             Expanded(
               child: Row(
@@ -112,7 +124,7 @@ class _EditorScreenState extends ConsumerState<EditorScreen> {
                       ],
                     ),
                   ),
-                  const RightInspector(),
+                  if (!isMobile) const RightInspector(),
                 ],
               ),
             ),
