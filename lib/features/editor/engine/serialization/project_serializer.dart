@@ -9,7 +9,7 @@ class ProjectSerializer {
   /// Serializes active state of [engine] into a formatted JSON string.
   static String serialize(CanvasEngine engine) {
     final layersData = engine.grid.layers.map((layer) {
-      final pixelsHex = layer.pixels.map((p) => p.color.toARGB32()).toList();
+      final pixelsHex = layer.pixels.map((p) => p.color.value).toList();
       return {
         'id': layer.id,
         'name': layer.name,
@@ -41,7 +41,7 @@ class ProjectSerializer {
                   'right': f.bounds.right,
                   'bottom': f.bounds.bottom,
                 },
-                'pixels': f.pixels.map((p) => p.color.toARGB32()).toList(),
+                'pixels': f.pixels.map((p) => p.color.value).toList(),
               };
             }).toList(),
           };
@@ -68,7 +68,7 @@ class ProjectSerializer {
       'brushSettings': {
         'size': engine.brushSettings.size,
         'opacity': engine.brushSettings.opacity,
-        'colorHex': engine.session.activeColor.toARGB32().toRadixString(16),
+        'colorHex': engine.session.activeColor.value.toRadixString(16),
       },
       'eraserSettings': {
         'size': engine.eraserSettings.size,

@@ -42,7 +42,7 @@ class LeftToolbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         width: 52,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           border: Border(right: BorderSide(color: AppColors.neutral200)),
         ),

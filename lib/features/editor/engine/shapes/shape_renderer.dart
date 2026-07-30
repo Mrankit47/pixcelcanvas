@@ -45,7 +45,7 @@ class ShapeRenderer {
       final oldPixel = layer.getPixel(x, y);
 
       // Only plot and record delta if color actually changes
-      if (oldPixel.color.toARGB32() != color.toARGB32() || oldPixel.opacity != 1.0) {
+      if (oldPixel.color.value != color.value || oldPixel.opacity != 1.0) {
         deltas.add(PixelDelta(
           x: x,
           y: y,

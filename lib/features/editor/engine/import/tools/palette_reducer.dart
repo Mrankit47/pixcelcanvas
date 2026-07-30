@@ -24,7 +24,7 @@ class PaletteReducer {
     final colorCounts = <int, int>{};
     for (final p in pixels) {
       if (!p.isEmpty) {
-        final argb = p.color.toARGB32();
+        final argb = p.color.value;
         colorCounts[argb] = (colorCounts[argb] ?? 0) + 1;
       }
     }
@@ -127,7 +127,7 @@ class PaletteReducer {
       final p = pixels[i];
       if (p.isEmpty) continue;
 
-      final argb = p.color.toARGB32();
+      final argb = p.color.value;
       final mappedColor = cache.putIfAbsent(
         argb,
         () => _findNearestColor(p.color, palette),

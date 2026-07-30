@@ -79,7 +79,7 @@ class ProjectCard extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: AppColors.primary50,
                       borderRadius: AppRadius.borderSm,
                     ),
@@ -97,7 +97,7 @@ class ProjectCard extends StatelessWidget {
                     left: AppSpacing.xs,
                     child: Container(
                       padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: AppColors.surface,
                         shape: BoxShape.circle,
                       ),

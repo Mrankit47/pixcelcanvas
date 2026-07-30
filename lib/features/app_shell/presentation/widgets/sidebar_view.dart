@@ -34,7 +34,7 @@ class SidebarView extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 150),
       width: sidebarManager.width,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Color(0xFF181825),
         border: Border(
           right: BorderSide(color: Color(0xFF2A2A3D)),

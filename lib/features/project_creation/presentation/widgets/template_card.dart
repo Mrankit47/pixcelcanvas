@@ -26,8 +26,8 @@ class TemplateCard extends StatelessWidget {
           color: const Color(0xFF1E1E2E),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: const Color(0xFF313244)),
-          boxShadow: const [
-            BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3)),
+          boxShadow: [
+            const BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3)),
           ],
         ),
         child: Column(
@@ -37,7 +37,7 @@ class TemplateCard extends StatelessWidget {
             Container(
               height: 100,
               width: double.infinity,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Color(0xFF181825),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
               ),

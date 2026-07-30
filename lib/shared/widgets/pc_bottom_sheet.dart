@@ -66,7 +66,7 @@ class PcBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: AppRadius.topLg,
           boxShadow: AppShadows.xl,

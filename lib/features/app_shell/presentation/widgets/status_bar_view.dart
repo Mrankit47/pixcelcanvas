@@ -26,7 +26,7 @@ class StatusBarView extends StatelessWidget {
     return Container(
       height: 26,
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Color(0xFF11111B),
         border: Border(
           top: BorderSide(color: Color(0xFF2A2A3D)),

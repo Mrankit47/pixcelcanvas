@@ -59,7 +59,7 @@ class SettingsTile extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(AppSpacing.xs),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: AppColors.neutral50,
                   borderRadius: AppRadius.borderXs,
                 ),

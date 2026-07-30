@@ -78,7 +78,7 @@ class TemplatePreviewDialog extends StatelessWidget {
               Container(
                 height: 180,
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: AppColors.primary50,
                   borderRadius: AppRadius.borderMd,
                 ),

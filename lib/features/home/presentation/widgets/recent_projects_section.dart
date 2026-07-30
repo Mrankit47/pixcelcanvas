@@ -79,7 +79,7 @@ class RecentProjectsSection extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Container(
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               color: AppColors.neutral100,
                               borderRadius: AppRadius.borderXs,
                             ),

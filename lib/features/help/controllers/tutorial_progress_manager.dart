@@ -28,7 +28,7 @@ class TutorialProgressManager extends ChangeNotifier {
   ];
 
   /// Unmodifiable achievements list.
-  List<LearningAchievement> get achievements => List.unmodifiable(_achievements);
+  List<LearningAchievement> get achievements => List<LearningAchievement>.from(_achievements);
 
   /// Returns progress for [tutorialId].
   TutorialProgress getProgress(String tutorialId) {

@@ -82,7 +82,7 @@ class ArtworkPreviewDialog extends StatelessWidget {
               Container(
                 height: 220,
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: AppColors.primary50,
                   borderRadius: AppRadius.borderMd,
                 ),

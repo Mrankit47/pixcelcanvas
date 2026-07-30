@@ -5,7 +5,7 @@ class ProjectIndex {
   final List<ProjectMetadata> _entries = [];
 
   /// Unmodifiable list of project metadata entries.
-  List<ProjectMetadata> get entries => List.unmodifiable(_entries);
+  List<ProjectMetadata> get entries => List<ProjectMetadata>.from(_entries);
 
   /// Active non-archived projects list.
   List<ProjectMetadata> get activeProjects =>

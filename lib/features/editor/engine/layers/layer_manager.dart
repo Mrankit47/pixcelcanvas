@@ -21,7 +21,7 @@ class LayerManager {
   int get layerCount => _engine.grid.layers.length;
 
   /// Read-only view of layer list.
-  List<LayerBuffer> get layers => List.unmodifiable(_engine.grid.layers);
+  List<LayerBuffer> get layers => List<LayerBuffer>.from(_engine.grid.layers);
 
   /// Creates a new layer above the current active layer index.
   void createLayer() {

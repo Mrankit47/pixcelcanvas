@@ -60,7 +60,7 @@ class FeaturedTemplatesCarousel extends StatelessWidget {
                         Container(
                           width: 80,
                           height: double.infinity,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: AppColors.primary50,
                             borderRadius: AppRadius.borderXs,
                           ),
@@ -83,7 +83,7 @@ class FeaturedTemplatesCarousel extends StatelessWidget {
                                   horizontal: 6,
                                   vertical: 2,
                                 ),
-                                decoration: const BoxDecoration(
+                                decoration: BoxDecoration(
                                   color: AppColors.secondary,
                                   borderRadius: AppRadius.borderFull,
                                 ),

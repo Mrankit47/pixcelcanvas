@@ -54,7 +54,7 @@ class TopActionBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) => Container(
         height: 56,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           border: Border(bottom: BorderSide(color: AppColors.neutral200)),
         ),

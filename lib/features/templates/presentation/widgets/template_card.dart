@@ -65,7 +65,7 @@ class TemplateCard extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: AppColors.primary50,
                       borderRadius: AppRadius.borderSm,
                     ),
@@ -82,7 +82,7 @@ class TemplateCard extends StatelessWidget {
                     left: AppSpacing.xs,
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: AppColors.surface,
                         borderRadius: AppRadius.borderFull,
                       ),

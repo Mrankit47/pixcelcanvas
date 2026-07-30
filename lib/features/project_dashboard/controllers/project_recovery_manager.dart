@@ -7,7 +7,7 @@ class ProjectRecoveryManager extends ChangeNotifier {
 
   /// Recoverable session projects getter.
   List<ProjectMetadata> get recoverableProjects =>
-      List.unmodifiable(_recoverableProjects);
+      List<ProjectMetadata>.from(_recoverableProjects);
 
   /// True if session recovery items exist.
   bool get hasRecoverableSession => _recoverableProjects.isNotEmpty;

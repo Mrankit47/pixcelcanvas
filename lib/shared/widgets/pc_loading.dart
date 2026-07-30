@@ -72,7 +72,7 @@ class PcLoading extends StatelessWidget {
       PcLoadingVariant.skeleton => Container(
           width: width,
           height: size,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: AppColors.neutral100,
             borderRadius: AppRadius.borderSm,
           ),

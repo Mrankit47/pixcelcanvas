@@ -34,7 +34,7 @@ class BottomNavigationShell extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         body: child,
         bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             boxShadow: AppShadows.sm,
           ),
           child: NavigationBar(

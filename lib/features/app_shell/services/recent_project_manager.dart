@@ -6,7 +6,7 @@ class RecentProjectManager extends ChangeNotifier {
   final List<RecentProject> _recentProjects = [];
 
   /// Unmodifiable recent project entries list.
-  List<RecentProject> get recentProjects => List.unmodifiable(_recentProjects);
+  List<RecentProject> get recentProjects => List<RecentProject>.from(_recentProjects);
 
   /// Adds or updates [project] entry in recent list.
   void addRecentProject(RecentProject project) {

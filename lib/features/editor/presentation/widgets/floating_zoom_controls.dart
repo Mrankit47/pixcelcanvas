@@ -38,7 +38,7 @@ class FloatingZoomControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           borderRadius: AppRadius.borderFull,
           boxShadow: AppShadows.md,

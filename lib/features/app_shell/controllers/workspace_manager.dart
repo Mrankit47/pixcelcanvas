@@ -16,7 +16,7 @@ class WorkspaceManager extends ChangeNotifier {
   final List<ProjectWorkspace> _workspaces = [];
 
   /// List getter.
-  List<ProjectWorkspace> get workspaces => List.unmodifiable(_workspaces);
+  List<ProjectWorkspace> get workspaces => List<ProjectWorkspace>.from(_workspaces);
 
   /// Currently active workspace index.
   int _activeWorkspaceIndex = 0;

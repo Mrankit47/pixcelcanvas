@@ -7,7 +7,7 @@ import 'package:pixelcanvas/features/editor/engine/sprite_sheet/models/frame_tag
 /// **Architecture**: Pure Dart value object with `copyWith` and `Equatable`.
 class FrameMetadata extends Equatable {
   /// Creates a [FrameMetadata].
-  const FrameMetadata({
+  FrameMetadata({
     required this.id,
     required this.name,
     required this.width,
@@ -15,9 +15,10 @@ class FrameMetadata extends Equatable {
     this.originX = 0,
     this.originY = 0,
     this.durationMs = 100,
-    this.tags = const [],
-    this.layerIds = const [],
-  });
+    List<FrameTag>? tags,
+    List<String>? layerIds,
+  })  : tags = tags != null ? List<FrameTag>.from(tags) : <FrameTag>[],
+        layerIds = layerIds != null ? List<String>.from(layerIds) : <String>[];
 
   /// Unique frame identifier.
   final String id;

@@ -77,7 +77,7 @@ class CommunityPreviewSection extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Container(
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               color: AppColors.primary50,
                               borderRadius: AppRadius.borderXs,
                             ),

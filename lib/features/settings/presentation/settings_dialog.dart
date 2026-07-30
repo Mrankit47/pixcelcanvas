@@ -41,7 +41,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
             // Left Navigation Sidebar
             Container(
               width: 180,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Color(0xFF181825),
                 borderRadius: BorderRadius.horizontal(left: Radius.circular(12)),
               ),

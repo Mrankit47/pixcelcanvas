@@ -20,7 +20,7 @@ class AuthHeader extends StatelessWidget {
           Container(
             width: 40,
             height: 40,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: AppColors.primary500,
               borderRadius: AppRadius.borderSm,
             ),

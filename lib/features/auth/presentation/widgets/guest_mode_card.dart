@@ -37,7 +37,7 @@ class GuestModeCard extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.all(AppSpacing.sm),
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: AppColors.primary100,
                     shape: BoxShape.circle,
                   ),

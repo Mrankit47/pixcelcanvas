@@ -6,7 +6,7 @@ class ArchivedProjectsManager extends ChangeNotifier {
   final List<ProjectMetadata> _archived = [];
 
   /// Archived projects list getter.
-  List<ProjectMetadata> get archived => List.unmodifiable(_archived);
+  List<ProjectMetadata> get archived => List<ProjectMetadata>.from(_archived);
 
   /// Archives [project] (soft delete).
   void archive(ProjectMetadata project) {

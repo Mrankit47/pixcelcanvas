@@ -36,8 +36,8 @@ class ProjectCard extends StatelessWidget {
             color: metadata.isPinned ? const Color(0xFF6C5CE7) : const Color(0xFF313244),
             width: metadata.isPinned ? 1.5 : 1.0,
           ),
-          boxShadow: const [
-            BoxShadow(color: Colors.black26, blurRadius: 8, offset: Offset(0, 4)),
+          boxShadow: [
+            const BoxShadow(color: Colors.black26, blurRadius: 8, offset: Offset(0, 4)),
           ],
         ),
         child: Column(

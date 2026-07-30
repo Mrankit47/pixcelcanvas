@@ -6,7 +6,7 @@ class RecentTemplateManager extends ChangeNotifier {
   final List<TemplatePreset> _recents = [];
 
   /// Unmodifiable list of recently used templates.
-  List<TemplatePreset> get recents => List.unmodifiable(_recents);
+  List<TemplatePreset> get recents => List<TemplatePreset>.from(_recents);
 
   /// Registers template as recently used.
   void useTemplate(TemplatePreset template) {

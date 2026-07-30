@@ -69,7 +69,7 @@ class ArtworkCard extends StatelessWidget {
             Expanded(
               child: Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: AppColors.primary50,
                   borderRadius: AppRadius.borderSm,
                 ),
@@ -88,7 +88,7 @@ class ArtworkCard extends StatelessWidget {
                         onTap: onLike,
                         child: Container(
                           padding: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: AppColors.surface,
                             shape: BoxShape.circle,
                           ),

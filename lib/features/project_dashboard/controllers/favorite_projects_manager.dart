@@ -6,7 +6,7 @@ class FavoriteProjectsManager extends ChangeNotifier {
   final List<ProjectMetadata> _favorites = [];
 
   /// Favorites list getter.
-  List<ProjectMetadata> get favorites => List.unmodifiable(_favorites);
+  List<ProjectMetadata> get favorites => List<ProjectMetadata>.from(_favorites);
 
   /// Toggles favorite status of [project].
   void toggleFavorite(ProjectMetadata project) {

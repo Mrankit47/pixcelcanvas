@@ -29,7 +29,7 @@ class TopToolbarView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 44,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Color(0xFF1E1E2E),
         border: Border(
           bottom: BorderSide(color: Color(0xFF2A2A3D)),

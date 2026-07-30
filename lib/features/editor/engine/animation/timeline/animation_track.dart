@@ -6,10 +6,10 @@ class AnimationTrack {
   AnimationTrack({
     required this.id,
     required this.name,
-    this.clips = const [],
+    List<AnimationClip>? clips,
     this.isVisible = true,
     this.isMuted = false,
-  });
+  }) : clips = clips != null ? List<AnimationClip>.from(clips) : <AnimationClip>[];
 
   /// Unique track identifier.
   final String id;

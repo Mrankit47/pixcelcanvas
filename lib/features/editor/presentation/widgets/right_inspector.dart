@@ -53,7 +53,7 @@ class _RightInspectorState extends ConsumerState<RightInspector>
 
     return Container(
       width: 280,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.surface,
         border: Border(left: BorderSide(color: AppColors.neutral200)),
       ),

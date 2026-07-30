@@ -12,10 +12,10 @@ class SpriteSheet {
     required this.name,
     required this.width,
     required this.height,
-    this.frames = const [],
+    List<SpriteFrame>? frames,
     this.activeFrameIndex = 0,
     this.settings = const SpriteSheetSettings(),
-  });
+  }) : frames = frames != null ? List<SpriteFrame>.from(frames) : <SpriteFrame>[];
 
   /// Unique sprite sheet identifier.
   final String id;

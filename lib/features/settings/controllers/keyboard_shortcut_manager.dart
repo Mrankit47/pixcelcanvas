@@ -7,7 +7,7 @@ class KeyboardShortcutManager extends ChangeNotifier {
   final List<ShortcutBinding> _bindings = List.from(ShortcutBinding.defaultBindings);
 
   /// Unmodifiable list of active shortcut bindings.
-  List<ShortcutBinding> get bindings => List.unmodifiable(_bindings);
+  List<ShortcutBinding> get bindings => List<ShortcutBinding>.from(_bindings);
 
   /// Active shortcut conflicts list.
   List<ShortcutConflict> get conflicts => ShortcutConflictResolver.detectConflicts(_bindings);

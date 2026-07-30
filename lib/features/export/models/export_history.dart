@@ -26,7 +26,7 @@ class ExportHistory {
   final List<ExportJob> _records = [];
 
   /// Records list getter.
-  List<ExportJob> get records => List.unmodifiable(_records);
+  List<ExportJob> get records => List<ExportJob>.from(_records);
 
   /// Adds job to history.
   void addRecord(ExportJob job) {

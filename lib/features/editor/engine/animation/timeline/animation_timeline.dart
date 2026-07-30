@@ -11,18 +11,19 @@ import 'package:pixelcanvas/features/editor/engine/animation/timeline/timeline_s
 class AnimationTimeline {
   /// Creates an [AnimationTimeline].
   AnimationTimeline({
-    this.clips = const [],
+    List<AnimationClip>? clips,
     this.activeClipIndex = 0,
     this.zoomLevel = 1.0,
     TimelineCursor? cursor,
     TimelineSelection? selection,
-  })  : cursor = cursor ?? const TimelineCursor(),
+  })  : clips = clips != null ? List<AnimationClip>.from(clips) : <AnimationClip>[],
+        cursor = cursor ?? const TimelineCursor(),
         selection = selection ?? const TimelineSelection() {
     tracks = [
       AnimationTrack(
         id: 'track_main',
         name: 'Main Track',
-        clips: clips,
+        clips: this.clips,
       ),
     ];
   }

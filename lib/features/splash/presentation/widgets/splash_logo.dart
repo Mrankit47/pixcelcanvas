@@ -27,7 +27,7 @@ class SplashLogo extends StatelessWidget {
         child: Container(
           width: size,
           height: size,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: AppColors.primary500,
             borderRadius: AppRadius.borderLg,
             boxShadow: AppShadows.lg,
@@ -48,7 +48,7 @@ class SplashLogo extends StatelessWidget {
                 child: Container(
                   width: size * 0.22,
                   height: size * 0.22,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: AppColors.secondary,
                     shape: BoxShape.circle,
                   ),

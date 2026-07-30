@@ -13,7 +13,7 @@ class TemplateManager extends ChangeNotifier {
       TemplateSearchEngine.filterAndSort(_templates, filterOptions);
 
   /// All registered templates.
-  List<TemplatePreset> get allTemplates => List.unmodifiable(_templates);
+  List<TemplatePreset> get allTemplates => List<TemplatePreset>.from(_templates);
 
   /// Registers a custom user template.
   void registerTemplate(TemplatePreset template) {

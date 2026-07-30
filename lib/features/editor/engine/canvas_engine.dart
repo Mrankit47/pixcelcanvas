@@ -287,7 +287,7 @@ class CanvasEngine extends ChangeNotifier {
       final activeLayer = grid.layers[session.activeLayerIndex];
       final oldPixel = activeLayer.getPixel(x, y);
 
-      if (oldPixel.color.toARGB32() == fillColor.toARGB32()) return;
+      if (oldPixel.color.value == fillColor.value) return;
 
       final batch = CommandBatch('Bucket Fill');
 

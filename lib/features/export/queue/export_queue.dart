@@ -7,7 +7,7 @@ class ExportQueue extends ChangeNotifier {
   bool _isPaused = false;
 
   /// Jobs list getter.
-  List<ExportJob> get jobs => List.unmodifiable(_jobs);
+  List<ExportJob> get jobs => List<ExportJob>.from(_jobs);
 
   /// True if queue is paused.
   bool get isPaused => _isPaused;

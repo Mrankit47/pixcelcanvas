@@ -24,7 +24,7 @@ class FloodFillEngine {
     final replacementPixel = Pixel(color: fillColor);
 
     // Skip if replacement color is identical to target color
-    if (targetPixel.color.toARGB32() == fillColor.toARGB32()) return;
+    if (targetPixel.color.value == fillColor.value) return;
 
     final queue = Queue<Point<int>>();
     queue.add(Point(startX, startY));
@@ -42,7 +42,7 @@ class FloodFillEngine {
       visited.add(key);
 
       final current = layer.getPixel(x, y);
-      if (current.color.toARGB32() != targetPixel.color.toARGB32()) continue;
+      if (current.color.value != targetPixel.color.value) continue;
 
       layer.setPixel(x, y, replacementPixel);
 

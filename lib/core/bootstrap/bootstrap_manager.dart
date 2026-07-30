@@ -45,7 +45,7 @@ class BootstrapManager {
   BootstrapResult finish({required bool isSuccess}) {
     _totalStopwatch.stop();
     final result = BootstrapResult(
-      steps: List.unmodifiable(_steps),
+      steps: List.from(_steps),
       totalDuration: _totalStopwatch.elapsed,
       isSuccess: isSuccess,
     );

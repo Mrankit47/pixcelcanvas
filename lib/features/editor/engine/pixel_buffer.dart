@@ -21,7 +21,7 @@ class PixelBuffer {
   final List<Pixel> _pixels;
 
   /// Exposes read-only pixel list.
-  List<Pixel> get pixels => List.unmodifiable(_pixels);
+  List<Pixel> get pixels => List<Pixel>.from(_pixels);
 
   /// Reads pixel at (x, y).
   Pixel getPixel(int x, int y) {

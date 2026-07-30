@@ -62,7 +62,7 @@ class OnboardingPage extends StatelessWidget {
               Container(
                 width: 140,
                 height: 140,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: AppColors.primary50,
                   borderRadius: AppRadius.borderXxl,
                   boxShadow: AppShadows.md,

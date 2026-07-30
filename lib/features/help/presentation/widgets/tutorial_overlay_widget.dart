@@ -30,8 +30,8 @@ class TutorialOverlayWidget extends StatelessWidget {
             color: const Color(0xFF1E1E2E),
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: const Color(0xFF6C5CE7), width: 1.5),
-            boxShadow: const [
-              BoxShadow(color: Colors.black45, blurRadius: 16, offset: Offset(0, 6)),
+            boxShadow: [
+              const BoxShadow(color: Colors.black45, blurRadius: 16, offset: Offset(0, 6)),
             ],
           ),
           child: Row(

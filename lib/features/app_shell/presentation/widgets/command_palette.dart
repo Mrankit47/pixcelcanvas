@@ -74,8 +74,8 @@ class _CommandPaletteState extends State<CommandPalette> {
             color: const Color(0xFF1E1E2E),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: const Color(0xFF313244)),
-            boxShadow: const [
-              BoxShadow(color: Colors.black45, blurRadius: 24, offset: Offset(0, 8)),
+            boxShadow: [
+              const BoxShadow(color: Colors.black45, blurRadius: 24, offset: Offset(0, 8)),
             ],
           ),
           child: Column(

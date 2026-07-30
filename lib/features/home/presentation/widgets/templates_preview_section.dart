@@ -78,7 +78,7 @@ class TemplatesPreviewSection extends StatelessWidget {
                         Container(
                           width: 40,
                           height: 40,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: AppColors.primary100,
                             borderRadius: AppRadius.borderXs,
                           ),

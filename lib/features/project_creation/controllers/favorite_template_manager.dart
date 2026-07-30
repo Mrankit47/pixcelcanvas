@@ -5,7 +5,7 @@ class FavoriteTemplateManager extends ChangeNotifier {
   final Set<String> _favoriteIds = {};
 
   /// Set of favorited template IDs.
-  Set<String> get favoriteIds => Set.unmodifiable(_favoriteIds);
+  Set<String> get favoriteIds => Set<String>.from(_favoriteIds);
 
   /// True if [templateId] is favorited.
   bool isFavorite(String templateId) => _favoriteIds.contains(templateId);

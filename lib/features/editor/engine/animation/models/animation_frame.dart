@@ -7,13 +7,13 @@ import 'package:pixelcanvas/features/editor/engine/pixel.dart';
 /// **Architecture**: Pure Dart value object with `copyWith` and `Equatable`.
 class AnimationFrame extends Equatable {
   /// Creates an [AnimationFrame].
-  const AnimationFrame({
+  AnimationFrame({
     required this.id,
     this.spriteFrameId,
     this.durationMs = 100,
     this.fpsOverride,
-    this.pixels = const [],
-  });
+    List<Pixel>? pixels,
+  }) : pixels = pixels != null ? List<Pixel>.from(pixels) : <Pixel>[];
 
   /// Unique frame instance identifier.
   final String id;

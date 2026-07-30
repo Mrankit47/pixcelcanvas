@@ -38,7 +38,7 @@ class BottomStatusBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         height: 28,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.surface,
           border: Border(top: BorderSide(color: AppColors.neutral200)),
         ),

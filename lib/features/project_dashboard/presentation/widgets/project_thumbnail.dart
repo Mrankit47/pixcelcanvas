@@ -21,7 +21,7 @@ class ProjectThumbnail extends StatelessWidget {
     return Container(
       height: height,
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Color(0xFF181825),
         borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
       ),

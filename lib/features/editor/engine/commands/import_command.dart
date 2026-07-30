@@ -12,12 +12,12 @@ class ImportCommand extends HistoryCommand {
   /// Creates an [ImportCommand].
   ImportCommand({
     required this.destination,
-    this.deltas = const [],
+    List<PixelDelta>? deltas,
     this.createdLayerIndex,
     this.previousLayers,
     this.previousWidth,
     this.previousHeight,
-  });
+  }) : deltas = deltas != null ? List<PixelDelta>.from(deltas) : <PixelDelta>[];
 
   /// Import destination strategy.
   final ImportDestination destination;

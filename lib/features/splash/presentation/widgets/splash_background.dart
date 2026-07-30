@@ -34,7 +34,7 @@ class SplashBackground extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment(-1.0 + value * 0.5, -1.0),
                   end: Alignment(1.0 - value * 0.5, 1.0),
-                  colors: const [
+                  colors: [
                     AppColors.surface,
                     AppColors.background,
                     AppColors.primary50,

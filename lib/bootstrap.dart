@@ -13,9 +13,6 @@ import 'package:pixelcanvas/core/utils/logger.dart';
 /// Executes the 10-step startup sequence with global error boundaries,
 /// structured logging, and lifecycle observer registration per prompt requirements.
 Future<void> bootstrap(Widget Function() builder) async {
-  // Step 1: Ensure Flutter widget binding is initialized
-  WidgetsFlutterBinding.ensureInitialized();
-
   // Configure Global Error Boundaries
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.presentError(details);
@@ -33,6 +30,9 @@ Future<void> bootstrap(Widget Function() builder) async {
 
   await runZonedGuarded(
     () async {
+      // Step 1: Ensure Flutter widget binding is initialized in current zone
+      WidgetsFlutterBinding.ensureInitialized();
+
       final manager = BootstrapManager()..start();
 
       try {

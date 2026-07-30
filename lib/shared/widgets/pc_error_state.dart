@@ -51,7 +51,7 @@ class PcErrorState extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(AppSpacing.base),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: AppColors.dangerLight,
                   shape: BoxShape.circle,
                 ),

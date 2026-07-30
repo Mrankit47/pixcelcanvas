@@ -10,11 +10,11 @@ class AnimationClip {
   AnimationClip({
     required this.id,
     required this.name,
-    this.frames = const [],
+    List<AnimationFrame>? frames,
     this.loopMode = LoopMode.loop,
     this.playbackSpeed = 1.0,
     this.fps = 12,
-  });
+  }) : frames = frames != null ? List<AnimationFrame>.from(frames) : <AnimationFrame>[];
 
   /// Unique clip identifier.
   final String id;
