@@ -47,7 +47,38 @@ class PixelCanvasPainter extends CustomPainter {
       }
     }
 
-    // 3. Draw Grid Lines
+    // 3. Draw Active Shape Preview
+    if (engine.shapeEngine.isDrawing) {
+      final shapePaint = Paint()
+        ..color = engine.session.activeColor
+        ..style = PaintingStyle.fill;
+      for (final p in engine.shapeEngine.getShapePoints()) {
+        if (p.x >= 0 && p.x < engine.width && p.y >= 0 && p.y < engine.height) {
+          final rect = Rect.fromLTWH(p.x * cellSize, p.y * cellSize, cellSize, cellSize);
+          canvas.drawRect(rect, shapePaint);
+        }
+      }
+    }
+
+    // 4. Draw Selection Overlay
+    if (engine.hasSelection && engine.selectionEngine.isSelectionVisible) {
+      final bounds = engine.selectionEngine.selectionBounds;
+      if (bounds != null) {
+        final selPaint = Paint()
+          ..color = AppColors.primary500
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.5;
+        final selRect = Rect.fromLTRB(
+          bounds.left * cellSize,
+          bounds.top * cellSize,
+          (bounds.right + 1) * cellSize,
+          (bounds.bottom + 1) * cellSize,
+        );
+        canvas.drawRect(selRect, selPaint);
+      }
+    }
+
+    // 5. Draw Grid Lines
     if (showGrid) {
       final gridPaint = Paint()
         ..color = AppColors.neutral200.withValues(alpha: 0.4)

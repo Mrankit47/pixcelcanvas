@@ -20,6 +20,9 @@ class HistoryManager {
   /// True if undo action is available.
   bool get canUndo => _undoStack.isNotEmpty;
 
+  /// Exposes current undo command stack.
+  List<HistoryCommand> get undoStack => List.from(_undoStack);
+
   /// True if redo action is available.
   bool get canRedo => _redoStack.isNotEmpty;
 

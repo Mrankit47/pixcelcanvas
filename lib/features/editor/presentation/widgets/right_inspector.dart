@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pixelcanvas/features/editor/engine/canvas_engine.dart';
+import 'package:pixelcanvas/features/editor/engine/shapes/models/shape_settings.dart';
 import 'package:pixelcanvas/features/editor/presentation/controllers/editor_controller.dart';
 import 'package:pixelcanvas/features/editor/presentation/state/editor_state.dart';
 import 'package:pixelcanvas/features/editor/presentation/widgets/canvas_viewport.dart';
@@ -130,7 +131,6 @@ class _RightInspectorState extends ConsumerState<RightInspector>
           )
         else
           ...List.generate(state.layers.length, (index) {
-            // Render from top of stack to bottom
             final layerIndex = state.layers.length - 1 - index;
             final layer = state.layers[layerIndex];
             final isSelected = layerIndex == state.selectedLayerIndex;
@@ -140,6 +140,7 @@ class _RightInspectorState extends ConsumerState<RightInspector>
               isVisible: layer.isVisible,
               isLocked: layer.isLocked,
               isSelected: isSelected,
+              canDelete: state.layers.length > 1,
               onTap: () {
                 engine.selectLayer(layerIndex);
                 controller.syncEngineState(engine);
@@ -152,6 +153,12 @@ class _RightInspectorState extends ConsumerState<RightInspector>
                 engine.toggleLayerLock(layerIndex);
                 controller.syncEngineState(engine);
               },
+              onDelete: () {
+                if (state.layers.length > 1) {
+                  engine.deleteLayer(layerIndex);
+                  controller.syncEngineState(engine);
+                }
+              },
             );
           }),
       ],
@@ -163,9 +170,11 @@ class _RightInspectorState extends ConsumerState<RightInspector>
     required bool isVisible,
     required bool isLocked,
     required bool isSelected,
+    required bool canDelete,
     required VoidCallback onTap,
     required VoidCallback onToggleVisibility,
     required VoidCallback onToggleLock,
+    required VoidCallback onDelete,
   }) =>
       GestureDetector(
         onTap: onTap,
@@ -205,6 +214,19 @@ class _RightInspectorState extends ConsumerState<RightInspector>
                 ),
                 onPressed: onToggleLock,
               ),
+              if (canDelete) ...[
+                const SizedBox(width: AppSpacing.xs),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  icon: const Icon(
+                    Icons.delete_outline_rounded,
+                    size: 16,
+                    color: AppColors.neutral400,
+                  ),
+                  onPressed: onDelete,
+                ),
+              ],
             ],
           ),
         ),
@@ -279,6 +301,17 @@ class _RightInspectorState extends ConsumerState<RightInspector>
             style: AppTypography.labelMedium.copyWith(color: AppColors.neutral600),
           ),
           const SizedBox(height: AppSpacing.sm),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Show Grid', style: AppTypography.bodySmall),
+              Switch(
+                value: state.showGrid,
+                onChanged: (_) => controller.toggleGrid(),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
           if (state.selectedTool == PixelTool.pencil ||
               state.selectedTool == PixelTool.brush ||
               state.selectedTool == PixelTool.eraser) ...[
@@ -301,9 +334,37 @@ class _RightInspectorState extends ConsumerState<RightInspector>
                 controller.syncEngineState(engine);
               },
             ),
+          ] else if (state.selectedTool == PixelTool.line ||
+              state.selectedTool == PixelTool.rectangle ||
+              state.selectedTool == PixelTool.circle) ...[
+            Text('Shape Fill Mode', style: AppTypography.bodySmall),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                      engine.setShapeFillMode(ShapeFillMode.outline);
+                      controller.syncEngineState(engine);
+                    },
+                    child: const Text('Outline'),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      engine.setShapeFillMode(ShapeFillMode.filled);
+                      controller.syncEngineState(engine);
+                    },
+                    child: const Text('Filled'),
+                  ),
+                ),
+              ],
+            ),
           ] else
             Text(
-              'No adjustable properties for this tool',
+              'Standard selection and transformation active',
               style: AppTypography.bodySmall.copyWith(color: AppColors.neutral400),
             ),
         ],
@@ -316,6 +377,8 @@ class _RightInspectorState extends ConsumerState<RightInspector>
     CanvasEngine engine,
     EditorController controller,
   ) {
+    final undoStack = engine.historyManager.undoStack;
+
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.sm),
       child: Column(
@@ -347,11 +410,20 @@ class _RightInspectorState extends ConsumerState<RightInspector>
           ),
           const SizedBox(height: AppSpacing.md),
           Expanded(
-            child: ListView(
-              children: [
-                _buildHistoryItem('Canvas Initialized', 'Start'),
-              ],
-            ),
+            child: undoStack.isEmpty
+                ? Center(
+                    child: Text(
+                      'No history actions yet',
+                      style: AppTypography.bodySmall.copyWith(color: AppColors.neutral400),
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: undoStack.length,
+                    itemBuilder: (context, index) {
+                      final item = undoStack[undoStack.length - 1 - index];
+                      return _buildHistoryItem(item.name, 'Step ${undoStack.length - index}');
+                    },
+                  ),
           ),
         ],
       ),
