@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pixelcanvas/shared/widgets/pc_button.dart';
-import 'package:pixelcanvas/shared/widgets/pc_card.dart';
+import 'package:pixelcanvas/shared/widgets/pixel_button.dart';
+import 'package:pixelcanvas/shared/widgets/pixel_card.dart';
 import 'package:pixelcanvas/theme/app_colors.dart';
 import 'package:pixelcanvas/theme/app_radius.dart';
 import 'package:pixelcanvas/theme/app_spacing.dart';
 import 'package:pixelcanvas/theme/app_typography.dart';
 
-/// Featured active project card for the Home Dashboard per Blueprint §5.1.
-///
-/// **Purpose**: Highlights the most recently edited project for 1-tap continuation.
-/// **Parameters**:
-/// - [title]: Project title string (default: "Dragon Sprite").
-/// - [gridSize]: Canvas dimension label (default: "32x32").
-/// - [lastEdited]: Time ago string (default: "Edited 2m ago").
-/// - [onContinue]: Callback when "Continue Editing" button is tapped.
-///
-/// **Future Extension Notes**: Will bind to `projectRepository.getRecentProjects()` in Phase 2 Step 5.
+/// Featured active project card for the Home Dashboard per Blueprint §5.1 & Version 1.0 Design System.
 class ContinueWorkingCard extends StatelessWidget {
   /// Creates a [ContinueWorkingCard].
   const ContinueWorkingCard({
@@ -45,29 +36,30 @@ class ContinueWorkingCard extends StatelessWidget {
           Text(
             'Continue Working',
             style: AppTypography.titleMedium.copyWith(
-              color: AppColors.neutral600,
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
-          PcCard(
-            variant: PcCardVariant.elevated,
+          PixelCard(
             padding: const EdgeInsets.all(AppSpacing.base),
             onTap: onContinue,
             child: Row(
               children: [
-                // Pixel Canvas Thumbnail Placeholder
+                // Pixel Canvas Thumbnail Placeholder with Cyan Accent Border
                 Container(
                   width: 72,
                   height: 72,
                   decoration: BoxDecoration(
                     color: AppColors.primary50,
                     borderRadius: AppRadius.borderSm,
-                    border: Border.fromBorderSide(
-                      BorderSide(color: AppColors.neutral200),
+                    border: Border.all(
+                      color: AppColors.accentCyan.withValues(alpha: 0.4),
+                      width: 1.5,
                     ),
                   ),
                   child: const Icon(
-                    Icons.palette_outlined,
+                    Icons.palette_rounded,
                     color: AppColors.primary500,
                     size: 32,
                   ),
@@ -82,7 +74,8 @@ class ContinueWorkingCard extends StatelessWidget {
                       Text(
                         title,
                         style: AppTypography.titleMedium.copyWith(
-                          color: AppColors.neutral600,
+                          color: AppColors.textPrimary,
+                          fontWeight: FontWeight.w700,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -90,16 +83,19 @@ class ContinueWorkingCard extends StatelessWidget {
                       const SizedBox(height: AppSpacing.xxs),
                       Text(
                         '$gridSize • $lastEdited',
-                        style: AppTypography.bodySmall.copyWith(
-                          color: AppColors.neutral400,
+                        style: AppTypography.pixelCoordinates.copyWith(
+                          color: AppColors.textSecondary,
                         ),
                       ),
                       const SizedBox(height: AppSpacing.sm),
-                      PcButton(
+                      PixelButton(
                         label: 'Continue Editing',
-                        size: PcButtonSize.small,
-                        variant: PcButtonVariant.primary,
-                        leadingIcon: Icons.edit_rounded,
+                        variant: PixelButtonVariant.primary,
+                        icon: const Icon(
+                          Icons.edit_rounded,
+                          size: 16,
+                          color: AppColors.canvas,
+                        ),
                         onPressed: onContinue,
                       ),
                     ],

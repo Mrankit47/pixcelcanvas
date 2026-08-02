@@ -21,7 +21,6 @@ class QuickActionsSection extends StatelessWidget {
     this.onNewProject,
     this.onImportImage,
     this.onTemplates,
-    this.onColorPalette,
     super.key,
   });
 
@@ -33,9 +32,6 @@ class QuickActionsSection extends StatelessWidget {
 
   /// Templates callback.
   final VoidCallback? onTemplates;
-
-  /// Color palette callback.
-  final VoidCallback? onColorPalette;
 
   @override
   Widget build(BuildContext context) => Row(
@@ -61,13 +57,6 @@ class QuickActionsSection extends StatelessWidget {
             icon: Icons.grid_view_rounded,
             color: AppColors.infoMain,
             onTap: onTemplates,
-          ),
-          _buildActionItem(
-            context,
-            label: 'Palettes',
-            icon: Icons.color_lens_rounded,
-            color: AppColors.warningMain,
-            onTap: onColorPalette,
           ),
         ],
       );

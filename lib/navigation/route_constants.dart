@@ -17,12 +17,4 @@ abstract final class RouteConstants {
   /// Templates tab navigator key.
   static final GlobalKey<NavigatorState> templatesTabNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'templatesTab');
-
-  /// Community tab navigator key.
-  static final GlobalKey<NavigatorState> communityTabNavigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: 'communityTab');
-
-  /// Profile tab navigator key.
-  static final GlobalKey<NavigatorState> profileTabNavigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: 'profileTab');
 }

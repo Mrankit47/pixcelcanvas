@@ -12,7 +12,7 @@ class PixelCanvasApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
-        title: 'PixelCanvas',
+        title: 'Pixel Canvas',
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.light,
         theme: AppTheme.lightTheme,

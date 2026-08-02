@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pixelcanvas/features/auth/presentation/auth_screen.dart';
-import 'package:pixelcanvas/features/community/presentation/community_screen.dart';
 import 'package:pixelcanvas/features/editor/presentation/editor_screen.dart';
 import 'package:pixelcanvas/features/home/presentation/home_screen.dart';
 import 'package:pixelcanvas/features/home/presentation/widgets/bottom_navigation_shell.dart';
 import 'package:pixelcanvas/features/onboarding/presentation/onboarding_screen.dart';
-import 'package:pixelcanvas/features/profile/presentation/profile_screen.dart';
 import 'package:pixelcanvas/features/projects/presentation/projects_screen.dart';
 import 'package:pixelcanvas/features/splash/presentation/splash_screen.dart';
 import 'package:pixelcanvas/features/templates/presentation/templates_screen.dart';
@@ -42,14 +39,7 @@ abstract final class AppRouter {
         ),
       ),
 
-      // ── 3. Authentication Screen Route ──
-      GoRoute(
-        path: RoutePaths.auth,
-        name: RouteNames.auth,
-        builder: (context, state) => const AuthScreen(),
-      ),
-
-      // ── 4. Stateful Shell Route (Bottom Navigation Shell §7.1) ──
+      // ── 3. Stateful Shell Route (Bottom Navigation Shell §7.1) ──
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) => BottomNavigationShell(
           currentIndex: navigationShell.currentIndex,
@@ -82,30 +72,6 @@ abstract final class AppRouter {
                 path: RoutePaths.templates,
                 name: RouteNames.templates,
                 builder: (context, state) => const TemplatesScreen(),
-              ),
-            ],
-          ),
-
-          // Tab 2: Community
-          StatefulShellBranch(
-            navigatorKey: RouteConstants.communityTabNavigatorKey,
-            routes: [
-              GoRoute(
-                path: RoutePaths.community,
-                name: RouteNames.community,
-                builder: (context, state) => const CommunityScreen(),
-              ),
-            ],
-          ),
-
-          // Tab 3: Profile
-          StatefulShellBranch(
-            navigatorKey: RouteConstants.profileTabNavigatorKey,
-            routes: [
-              GoRoute(
-                path: RoutePaths.profile,
-                name: RouteNames.profile,
-                builder: (context, state) => const ProfileScreen(),
               ),
             ],
           ),

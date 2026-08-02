@@ -76,4 +76,36 @@ abstract final class AppShadows {
           color: const Color(0x29000000),
         ),
       ];
+
+  // ── Brand Specific Pixel Glow Shadows ──
+
+  /// Deep Cosmic Purple & Electric Violet Brand Glow.
+  static List<BoxShadow> get pixelGlow => [
+        BoxShadow(
+          offset: const Offset(0, 4),
+          blurRadius: 16,
+          spreadRadius: -2,
+          color: AppColors.primary500.withValues(alpha: 0.35),
+        ),
+      ];
+
+  /// Neon Pixel Cyan Accent Glow.
+  static List<BoxShadow> get pixelCyanGlow => [
+        BoxShadow(
+          offset: const Offset(0, 4),
+          blurRadius: 12,
+          spreadRadius: -1,
+          color: AppColors.accentCyan.withValues(alpha: 0.4),
+        ),
+      ];
+
+  /// Soft Card Elevation with Pixel Edge Glow.
+  static List<BoxShadow> get pixelCardShadow => [
+        BoxShadow(
+          offset: const Offset(0, 4),
+          blurRadius: 20,
+          spreadRadius: 0,
+          color: const Color(0x0C5B21B6),
+        ),
+      ];
 }

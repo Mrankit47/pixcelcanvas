@@ -1,141 +1,67 @@
 import 'package:flutter/material.dart';
 
-/// Centralized color tokens for PixelCanvas.
+/// Centralized color system for PixelCanvas Version 1.0 Design System.
 ///
-/// Light Theme ONLY. Derived directly from Blueprint §9.1 and §31.1.
+/// **Brand Identity**: Apple x Figma x Linear x Arc Browser x Aseprite.
 abstract final class AppColors {
-  // ── Primary Palette ──
-  /// Lightest primary tint - hover backgrounds, selected row.
-  static const Color primary50 = Color(0xFFF3F1FE);
+  // ── Brand Primary Palette: Deep Cosmic Purple ──
+  static const Color primary50 = Color(0xFFF5F3FF);
+  static const Color primary100 = Color(0xFFEDE9FE);
+  static const Color primary200 = Color(0xFFDDD6FE);
+  static const Color primary300 = Color(0xFFC4B5FD);
+  static const Color primary400 = Color(0xFFA78BFA);
+  static const Color primary500 = Color(0xFF7C3AED); // Electric Violet
+  static const Color primary600 = Color(0xFF6D28D9);
+  static const Color primary700 = Color(0xFF5B21B6); // Deep Cosmic Purple
+  static const Color primary800 = Color(0xFF4C1D95);
+  static const Color primary900 = Color(0xFF3B0764);
 
-  /// Light primary backgrounds, chip backgrounds.
-  static const Color primary100 = Color(0xFFE0DBFC);
+  // ── Brand Secondary & Accents ──
+  static const Color secondary = Color(0xFF7C3AED); // Electric Violet
+  static const Color accentCyan = Color(0xFF06B6D4); // Neon Pixel Cyan
+  static const Color accentEmerald = Color(0xFF10B981); // Pixel Emerald
+  static const Color accentOrange = Color(0xFFF97316); // Pixel Orange
 
-  /// Disabled button backgrounds.
-  static const Color primary200 = Color(0xFFC4B9F9);
+  // ── Neutrals & Surface Colors ──
+  static const Color canvas = Color(0xFFFFFFFF); // Pure White
+  static const Color background = Color(0xFFF8FAFC); // Soft Pearl White
+  static const Color surface = Color(0xFFF5F3FF); // Very Light Lavender
+  static const Color panel = Color(0xFFFFFFFF); // Warm White
+  static const Color border = Color(0xFFE2E8F0); // Soft Pixel Gray
+  static const Color textPrimary = Color(0xFF0F172A); // Near Black
+  static const Color textSecondary = Color(0xFF64748B); // Slate Gray
 
-  /// Secondary accents, progress bars.
-  static const Color primary300 = Color(0xFFA29BFE);
-
-  /// Hover states on primary elements.
-  static const Color primary400 = Color(0xFF8B7DF7);
-
-  /// Primary brand color — buttons, FAB, links, active states.
-  static const Color primary500 = Color(0xFF6C5CE7);
-
-  /// Pressed states.
-  static const Color primary600 = Color(0xFF5A4BD4);
-
-  /// Focus rings, emphasis.
-  static const Color primary700 = Color(0xFF4A3CB5);
-
-  /// Dark accent.
-  static const Color primary800 = Color(0xFF3A2E96);
-
-  /// Darkest primary tint.
-  static const Color primary900 = Color(0xFF2A1F77);
-
-  // ── Secondary Palette ──
-  /// Secondary brand color - accent highlights, badges.
-  static const Color secondary = Color(0xFF00CEC9);
-
-  // ── Neutral Scale ──
-  /// Pure white surface.
+  // ── Neutral Scale Aliases ──
   static const Color neutral0 = Color(0xFFFFFFFF);
+  static const Color neutral50 = Color(0xFFF8FAFC);
+  static const Color neutral100 = Color(0xFFF1F5F9);
+  static const Color neutral200 = Color(0xFFE2E8F0);
+  static const Color neutral300 = Color(0xFFCBD5E1);
+  static const Color neutral400 = Color(0xFF94A3B8);
+  static const Color neutral500 = Color(0xFF64748B);
+  static const Color neutral600 = Color(0xFF475569);
+  static const Color neutral700 = Color(0xFF334155);
+  static const Color neutral800 = Color(0xFF1E293B);
+  static const Color neutral900 = Color(0xFF0F172A);
 
-  /// Screen background, scaffold.
-  static const Color neutral50 = Color(0xFFF8F9FA);
+  // ── Semantic Feedback Colors ──
+  static const Color successMain = Color(0xFF10B981); // Mint Green
+  static const Color warningMain = Color(0xFFF59E0B); // Golden Amber
+  static const Color dangerMain = Color(0xFFEF4444); // Coral Red
+  static const Color dangerLight = Color(0xFFFEE2E2);
+  static const Color dangerDark = Color(0xFFB91C1C);
+  static const Color infoMain = Color(0xFF06B6D4); // Neon Cyan
 
-  /// Divider backgrounds, disabled fields.
-  static const Color neutral100 = Color(0xFFF1F3F5);
+  // ── UI Aliases ──
+  static const Color outline = Color(0xFFE2E8F0);
+  static const Color outlineFocused = Color(0xFF7C3AED);
 
-  /// Borders, dividers, outlines.
-  static const Color neutral200 = Color(0xFFDFE6E9);
-
-  /// Placeholder text, disabled icons.
-  static const Color neutral300 = Color(0xFFB2BEC3);
-
-  /// Secondary text, captions, placeholders.
-  static const Color neutral400 = Color(0xFF636E72);
-
-  /// Primary text, headings.
-  static const Color neutral500 = Color(0xFF2D3436);
-
-  /// High-emphasis text.
-  static const Color neutral600 = Color(0xFF1A1A2E);
-
-  /// Pure black for shadows.
-  static const Color neutral900 = Color(0xFF000000);
-
-  // ── Semantic Colors ──
-  /// Success container background.
-  static const Color successLight = Color(0xFFE8F8F5);
-
-  /// Success icons, text, borders.
-  static const Color successMain = Color(0xFF00B894);
-
-  /// Pressed success state.
-  static const Color successDark = Color(0xFF008C6F);
-
-  /// Warning container background.
-  static const Color warningLight = Color(0xFFFFF8E1);
-
-  /// Warning icons, text, borders.
-  static const Color warningMain = Color(0xFFFDCB6E);
-
-  /// Pressed warning state.
-  static const Color warningDark = Color(0xE0A800FF);
-
-  /// Danger/error container background.
-  static const Color dangerLight = Color(0xFFFFF0F0);
-
-  /// Danger/error icons, text, borders, destructive buttons.
-  static const Color dangerMain = Color(0xFFFF6B6B);
-
-  /// Pressed danger state.
-  static const Color dangerDark = Color(0xFFE05555);
-
-  /// Info container background.
-  static const Color infoLight = Color(0xFFE8F4FD);
-
-  /// Info icons, links.
-  static const Color infoMain = Color(0xFF0984E3);
-
-  /// Pressed info state.
-  static const Color infoDark = Color(0xFF0767B2);
-
-  // ── Surface & Background Aliases ──
-  /// Main scaffold background.
-  static const Color background = neutral50;
-
-  /// Card, sheet, dialog surface background.
-  static const Color surface = neutral0;
-
-  /// Input border outline.
-  static const Color outline = neutral200;
-
-  /// Focused outline border.
-  static const Color outlineFocused = primary500;
-
-  // ── Canvas Engine Colors ──
-  /// Default canvas fill background.
-  static const Color canvasBackground = neutral0;
-
-  /// Standard grid line color.
-  static const Color gridLine = Color(0x80E0E0E0);
-
-  /// Major grid line color (every 8 cells).
-  static const Color gridLineMajor = Color(0x80BDBDBD);
-
-  /// Transparency checkerboard - light square.
-  static const Color transparentCheckerLight = Color(0xFFEEEEEE);
-
-  /// Transparency checkerboard - dark square.
-  static const Color transparentCheckerDark = Color(0xFFCCCCCC);
-
-  /// Selection rectangle border (marching ants).
-  static const Color selectionBorder = primary500;
-
-  /// Tool ghost preview background.
-  static const Color toolPreview = Color(0x4D6C5CE7);
+  // ── Canvas Engine Rendering Tokens ──
+  static const Color canvasBackground = Color(0xFFFFFFFF);
+  static const Color gridLine = Color(0x33CBD5E1);
+  static const Color gridLineMajor = Color(0x6694A3B8);
+  static const Color transparentCheckerLight = Color(0xFFF8FAFC);
+  static const Color transparentCheckerDark = Color(0xFFE2E8F0);
+  static const Color selectionBorder = Color(0xFF06B6D4);
+  static const Color toolPreview = Color(0x337C3AED);
 }

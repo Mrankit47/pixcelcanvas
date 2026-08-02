@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pixelcanvas/theme/app_colors.dart';
 import 'package:pixelcanvas/theme/app_durations.dart';
 import 'package:pixelcanvas/theme/app_radius.dart';
+import 'package:pixelcanvas/theme/app_shadows.dart';
 import 'package:pixelcanvas/theme/app_spacing.dart';
 
 /// Left vertical drawing tools palette for Pixel Editor workspace per Blueprint §5.1 & §8.2.
@@ -41,10 +42,10 @@ class LeftToolbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        width: 52,
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          border: Border(right: BorderSide(color: AppColors.neutral200)),
+        width: 56,
+        decoration: const BoxDecoration(
+          color: AppColors.panel,
+          border: Border(right: BorderSide(color: AppColors.border, width: 1.0)),
         ),
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
         child: Column(
@@ -58,21 +59,32 @@ class LeftToolbar extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: AppSpacing.xs),
               child: AnimatedContainer(
                 duration: AppDurations.fast,
-                width: 40,
-                height: 40,
+                width: 42,
+                height: 42,
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.primary100 : Colors.transparent,
-                  borderRadius: AppRadius.borderSm,
-                  border: isSelected
-                      ? Border.all(color: AppColors.primary500, width: 1.5)
+                  gradient: isSelected
+                      ? const LinearGradient(
+                          colors: [AppColors.primary700, AppColors.primary500],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        )
                       : null,
+                  color: isSelected ? null : Colors.transparent,
+                  borderRadius: AppRadius.borderSm,
+                  border: Border.all(
+                    color: isSelected
+                        ? AppColors.accentCyan.withValues(alpha: 0.6)
+                        : Colors.transparent,
+                    width: 1.5,
+                  ),
+                  boxShadow: isSelected ? AppShadows.pixelGlow : null,
                 ),
                 child: IconButton(
                   padding: EdgeInsets.zero,
                   icon: Icon(
                     toolIcon,
                     size: 20,
-                    color: isSelected ? AppColors.primary500 : AppColors.neutral400,
+                    color: isSelected ? AppColors.canvas : AppColors.neutral500,
                   ),
                   onPressed: () => onToolSelected?.call(toolName),
                   tooltip: '$toolName ($shortcut)',

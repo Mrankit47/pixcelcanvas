@@ -26,17 +26,31 @@ class SplashFooter extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            // Pixel Blocks Assembling Progress Indicator
+            SizedBox(
+              width: 140,
+              height: 4,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(2),
+                child: const LinearProgressIndicator(
+                  backgroundColor: AppColors.surface,
+                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary500),
+                ),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.md),
+
             Text(
               version,
               style: AppTypography.labelSmall.copyWith(
-                color: AppColors.neutral400,
+                color: AppColors.textSecondary,
               ),
             ),
             const SizedBox(height: AppSpacing.xxs),
             Text(
-              'PixelCanvas • Light Edition',
+              'PixelCanvas Studio • Version 1.0',
               style: AppTypography.bodySmall.copyWith(
-                color: AppColors.neutral300,
+                color: AppColors.neutral400,
               ),
             ),
           ],

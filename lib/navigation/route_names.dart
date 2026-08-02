@@ -6,9 +6,6 @@ abstract final class RouteNames {
   /// Onboarding screen route name.
   static const String onboarding = 'onboarding';
 
-  /// Authentication screen route name.
-  static const String auth = 'auth';
-
   /// Home screen route name.
   static const String home = 'home';
 
@@ -17,15 +14,6 @@ abstract final class RouteNames {
 
   /// Templates screen route name.
   static const String templates = 'templates';
-
-  /// Community screen route name.
-  static const String community = 'community';
-
-  /// Artwork detail screen route name.
-  static const String artworkDetail = 'artworkDetail';
-
-  /// Profile screen route name.
-  static const String profile = 'profile';
 
   /// Canvas editor screen route name.
   static const String editor = 'editor';

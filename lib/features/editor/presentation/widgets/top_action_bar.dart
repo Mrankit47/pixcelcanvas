@@ -55,14 +55,21 @@ class TopActionBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) => Container(
         height: 56,
         decoration: BoxDecoration(
-          color: AppColors.surface,
-          border: Border(bottom: BorderSide(color: AppColors.neutral200)),
+          color: AppColors.panel,
+          border: const Border(bottom: BorderSide(color: AppColors.border, width: 1.0)),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primary700.withValues(alpha: 0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
         child: Row(
           children: [
             IconButton(
-              icon: const Icon(Icons.arrow_back_rounded, color: AppColors.neutral500),
+              icon: const Icon(Icons.arrow_back_rounded, color: AppColors.textPrimary),
               onPressed: onBack,
               tooltip: 'Back to projects',
             ),
@@ -74,48 +81,47 @@ class TopActionBar extends StatelessWidget implements PreferredSizeWidget {
                 Text(
                   projectName,
                   style: AppTypography.titleMedium.copyWith(
-                    color: AppColors.neutral600,
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 Text(
                   canvasSize,
-                  style: AppTypography.labelSmall.copyWith(
-                    color: AppColors.neutral400,
-                  ),
+                  style: AppTypography.pixelCoordinates,
                 ),
               ],
             ),
             const Spacer(),
 
-            // Action Icons
+            // Action Buttons
             IconButton(
-              icon: const Icon(Icons.undo_rounded, color: AppColors.neutral500),
+              icon: const Icon(Icons.undo_rounded, color: AppColors.textPrimary),
               onPressed: onUndo,
               tooltip: 'Undo (Ctrl+Z)',
             ),
             IconButton(
-              icon: const Icon(Icons.redo_rounded, color: AppColors.neutral500),
+              icon: const Icon(Icons.redo_rounded, color: AppColors.textPrimary),
               onPressed: onRedo,
               tooltip: 'Redo (Ctrl+Y)',
             ),
-            const VerticalDivider(indent: 12, endIndent: 12),
+            const VerticalDivider(indent: 14, endIndent: 14, color: AppColors.border),
             IconButton(
-              icon: const Icon(Icons.save_outlined, color: AppColors.neutral500),
+              icon: const Icon(Icons.save_rounded, color: AppColors.primary500),
               onPressed: onSave,
               tooltip: 'Save Project',
             ),
             IconButton(
-              icon: const Icon(Icons.ios_share_rounded, color: AppColors.neutral500),
+              icon: const Icon(Icons.ios_share_rounded, color: AppColors.accentCyan),
               onPressed: onExport,
               tooltip: 'Export Artwork',
             ),
             IconButton(
-              icon: const Icon(Icons.share_outlined, color: AppColors.neutral500),
+              icon: const Icon(Icons.share_rounded, color: AppColors.secondary),
               onPressed: onShare,
               tooltip: 'Share Artwork',
             ),
             IconButton(
-              icon: const Icon(Icons.settings_outlined, color: AppColors.neutral500),
+              icon: const Icon(Icons.settings_rounded, color: AppColors.textSecondary),
               onPressed: onSettings,
               tooltip: 'Canvas Settings',
             ),

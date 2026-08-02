@@ -45,26 +45,16 @@ class BottomNavigationShell extends StatelessWidget {
             selectedIndex: currentIndex,
             onDestinationSelected: onDestinationSelected,
             labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-            destinations: [
+            destinations: const [
               NavigationDestination(
-                icon: const Icon(Icons.home_outlined, color: AppColors.neutral300),
-                selectedIcon: const Icon(Icons.home_rounded, color: AppColors.primary500),
+                icon: Icon(Icons.home_outlined, color: AppColors.neutral300),
+                selectedIcon: Icon(Icons.home_rounded, color: AppColors.primary500),
                 label: 'Home',
               ),
               NavigationDestination(
-                icon: const Icon(Icons.grid_view_outlined, color: AppColors.neutral300),
-                selectedIcon: const Icon(Icons.grid_view_rounded, color: AppColors.primary500),
+                icon: Icon(Icons.grid_view_outlined, color: AppColors.neutral300),
+                selectedIcon: Icon(Icons.grid_view_rounded, color: AppColors.primary500),
                 label: 'Templates',
-              ),
-              NavigationDestination(
-                icon: const Icon(Icons.explore_outlined, color: AppColors.neutral300),
-                selectedIcon: const Icon(Icons.explore_rounded, color: AppColors.primary500),
-                label: 'Community',
-              ),
-              NavigationDestination(
-                icon: const Icon(Icons.person_outlined, color: AppColors.neutral300),
-                selectedIcon: const Icon(Icons.person_rounded, color: AppColors.primary500),
-                label: 'Profile',
               ),
             ],
           ),

@@ -6,9 +6,6 @@ abstract final class RoutePaths {
   /// Onboarding flow path.
   static const String onboarding = '/onboarding';
 
-  /// Authentication flow path.
-  static const String auth = '/auth';
-
   /// Bottom Nav Tab 0: Home path.
   static const String home = '/home';
 
@@ -17,15 +14,6 @@ abstract final class RoutePaths {
 
   /// Bottom Nav Tab 1: Templates library path.
   static const String templates = '/templates';
-
-  /// Bottom Nav Tab 2: Community gallery path.
-  static const String community = '/community';
-
-  /// Artwork detail path.
-  static const String artworkDetail = '/community/artwork/:id';
-
-  /// Bottom Nav Tab 3: User profile path.
-  static const String profile = '/profile';
 
   /// Canvas editor path.
   static const String editor = '/editor/:id';

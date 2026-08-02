@@ -77,22 +77,6 @@ class HomeHeader extends StatelessWidget {
             ),
           ),
 
-          // Action Icons
-          IconButton(
-            icon: const Icon(Icons.search_rounded, color: AppColors.neutral500),
-            onPressed: onSearch,
-            tooltip: 'Search projects',
-          ),
-          IconButton(
-            icon: const Icon(Icons.notifications_none_rounded, color: AppColors.neutral500),
-            onPressed: onNotifications,
-            tooltip: 'Notifications',
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings_outlined, color: AppColors.neutral500),
-            onPressed: onSettings,
-            tooltip: 'Settings',
-          ),
         ],
       );
 }

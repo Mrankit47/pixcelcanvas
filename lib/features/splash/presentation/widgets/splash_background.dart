@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pixelcanvas/shared/widgets/pixel_background.dart';
 import 'package:pixelcanvas/theme/app_colors.dart';
 
-/// Animated background widget for the Splash screen per Blueprint §5.1 and §26.5.
-///
-/// **Purpose**: Renders a subtle animated gradient background matching the light theme palette.
-/// **Parameters**:
-/// - [animation]: Animation emitting gradient alignment interpolation values.
-/// - [child]: Foreground content widget.
-///
-/// **Future Extension Notes**: Can incorporate subtle pixel grid background patterns in V2.
+/// Animated background widget for the Splash screen per Version 1.0 Design System.
 class SplashBackground extends StatelessWidget {
   /// Creates a [SplashBackground].
   const SplashBackground({
@@ -24,26 +18,15 @@ class SplashBackground extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) => AnimatedBuilder(
-        animation: animation,
-        builder: (context, _) {
-          final value = animation.value;
-          return SizedBox.expand(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment(-1.0 + value * 0.5, -1.0),
-                  end: Alignment(1.0 - value * 0.5, 1.0),
-                  colors: [
-                    AppColors.surface,
-                    AppColors.background,
-                    AppColors.primary50,
-                  ],
-                ),
-              ),
-              child: child,
-            ),
-          );
-        },
+  Widget build(BuildContext context) => PixelBackground(
+        backgroundColor: AppColors.background,
+        child: AnimatedBuilder(
+          animation: animation,
+          builder: (context, child) => FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+          child: child,
+        ),
       );
 }

@@ -37,35 +37,32 @@ class BottomStatusBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        height: 28,
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          border: Border(top: BorderSide(color: AppColors.neutral200)),
+        height: 32,
+        decoration: const BoxDecoration(
+          color: AppColors.panel,
+          border: Border(top: BorderSide(color: AppColors.border, width: 1.0)),
         ),
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
         child: Row(
           children: [
-            _buildStatusItem(Icons.aspect_ratio_rounded, canvasDimensions),
+            _buildStatusItem(Icons.aspect_ratio_rounded, canvasDimensions, textStyle: AppTypography.pixelMetric),
             const SizedBox(width: AppSpacing.md),
-            _buildStatusItem(Icons.zoom_in_rounded, zoomLevel),
+            _buildStatusItem(Icons.zoom_in_rounded, zoomLevel, textStyle: AppTypography.pixelMetric),
             const SizedBox(width: AppSpacing.md),
-            _buildStatusItem(Icons.mouse_rounded, cursorCoordinates),
+            _buildStatusItem(Icons.mouse_rounded, cursorCoordinates, textStyle: AppTypography.pixelCoordinates),
             const Spacer(),
-            _buildStatusItem(Icons.layers_outlined, layerCount),
+            _buildStatusItem(Icons.layers_outlined, layerCount, textStyle: AppTypography.pixelBadge),
           ],
         ),
       );
 
-  Widget _buildStatusItem(IconData icon, String text) => Row(
+  Widget _buildStatusItem(IconData icon, String text, {required TextStyle textStyle}) => Row(
         children: [
-          Icon(icon, size: 14, color: AppColors.neutral400),
+          Icon(icon, size: 14, color: AppColors.primary500),
           const SizedBox(width: AppSpacing.xxs),
           Text(
             text,
-            style: AppTypography.labelSmall.copyWith(
-              color: AppColors.neutral400,
-              fontSize: 11,
-            ),
+            style: textStyle,
           ),
         ],
       );

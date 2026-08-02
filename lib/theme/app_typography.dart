@@ -145,7 +145,36 @@ abstract final class AppTypography {
     fontWeight: FontWeight.w500,
     height: 1.4,
     letterSpacing: 0.5,
-    color: AppColors.neutral400,
+    color: AppColors.textSecondary,
+  );
+
+  // ── Pixel Accent Typography Scale (Used ONLY for Coordinates, FPS, Zoom, Tool Specs, Badges) ──
+
+  /// Pixel Coordinates — Monospace/Pixel style for X, Y canvas specs.
+  static const TextStyle pixelCoordinates = TextStyle(
+    fontFamily: 'Courier',
+    fontSize: 11,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 1.0,
+    color: AppColors.accentCyan,
+  );
+
+  /// Pixel Metric — FPS, Zoom percentage, canvas dimensions.
+  static const TextStyle pixelMetric = TextStyle(
+    fontFamily: 'Courier',
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0.8,
+    color: AppColors.primary500,
+  );
+
+  /// Pixel Badge — Tool labels, workspace status tags.
+  static const TextStyle pixelBadge = TextStyle(
+    fontFamily: 'Courier',
+    fontSize: 10,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0.5,
+    color: AppColors.textPrimary,
   );
 
   /// Assembles the complete Material 3 [TextTheme].
