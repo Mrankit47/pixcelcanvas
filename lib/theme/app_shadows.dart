@@ -85,7 +85,7 @@ abstract final class AppShadows {
           offset: const Offset(0, 4),
           blurRadius: 16,
           spreadRadius: -2,
-          color: AppColors.primary500.withValues(alpha: 0.35),
+          color: AppColors.primary500.withOpacity(0.35),
         ),
       ];
 
@@ -95,7 +95,7 @@ abstract final class AppShadows {
           offset: const Offset(0, 4),
           blurRadius: 12,
           spreadRadius: -1,
-          color: AppColors.accentCyan.withValues(alpha: 0.4),
+          color: AppColors.accentCyan.withOpacity(0.4),
         ),
       ];
 

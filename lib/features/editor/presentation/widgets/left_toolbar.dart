@@ -73,7 +73,7 @@ class LeftToolbar extends StatelessWidget {
                   borderRadius: AppRadius.borderSm,
                   border: Border.all(
                     color: isSelected
-                        ? AppColors.accentCyan.withValues(alpha: 0.6)
+                        ? AppColors.accentCyan.withOpacity(0.6)
                         : Colors.transparent,
                     width: 1.5,
                   ),

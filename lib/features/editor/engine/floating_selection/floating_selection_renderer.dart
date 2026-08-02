@@ -50,9 +50,8 @@ class FloatingSelectionRenderer {
           continue;
         }
 
-        paint.color = pixel.color.withValues(
-          alpha: pixel.opacity * pixel.color.a,
-        );
+        final clampedAlpha = (pixel.opacity * (pixel.color.a / 255.0)).clamp(0.0, 1.0);
+        paint.color = pixel.color.withOpacity(clampedAlpha);
 
         final rect = Rect.fromLTWH(screenX, screenY, cellSize, cellSize);
         canvas.drawRect(rect, paint);

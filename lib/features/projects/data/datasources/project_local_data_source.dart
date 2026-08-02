@@ -1,4 +1,3 @@
-import 'package:isar/isar.dart';
 import 'package:pixelcanvas/core/database/database_service.dart';
 import 'package:pixelcanvas/core/database/isar_id_generator.dart';
 import 'package:pixelcanvas/features/projects/data/models/project_model.dart';

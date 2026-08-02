@@ -54,7 +54,7 @@ class ContinueWorkingCard extends StatelessWidget {
                     color: AppColors.primary50,
                     borderRadius: AppRadius.borderSm,
                     border: Border.all(
-                      color: AppColors.accentCyan.withValues(alpha: 0.4),
+                      color: AppColors.accentCyan.withOpacity(0.4),
                       width: 1.5,
                     ),
                   ),

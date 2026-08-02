@@ -1,9 +1,4 @@
-import 'package:isar/isar.dart';
-import 'package:pixelcanvas/core/database/isar_id_generator.dart';
-
-
-/// Isar Local NoSQL Collection for NotificationItem Entity per Blueprint §6.2.
-@collection
+/// Local Data Model for NotificationItem Entity.
 class NotificationModel {
   /// Creates a [NotificationModel].
   NotificationModel({
@@ -14,11 +9,7 @@ class NotificationModel {
     this.isRead = false,
   });
 
-  /// Isar primary key.
-  Id get id => fastHash(uuid);
-
   /// Unique UUID index.
-  @Index(unique: true, replace: true)
   String uuid;
 
   /// Notification title.
@@ -28,7 +19,6 @@ class NotificationModel {
   String body;
 
   /// Timestamp index.
-  @Index()
   DateTime timestamp;
 
   /// Read status flag.

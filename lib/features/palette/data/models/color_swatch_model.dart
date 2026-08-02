@@ -1,8 +1,4 @@
-import 'package:isar/isar.dart';
-
-
-/// Isar Embedded Object for ColorSwatch Entity per Blueprint §6.2.
-@embedded
+/// Local Data Model for ColorSwatch Entity.
 class ColorSwatchModel {
   /// Creates a [ColorSwatchModel].
   ColorSwatchModel({

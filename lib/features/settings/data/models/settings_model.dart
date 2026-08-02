@@ -1,8 +1,4 @@
-import 'package:isar/isar.dart';
-
-
-/// Isar Local NoSQL Collection for Settings Entity per Blueprint §6.2.
-@collection
+/// Local Data Model for Settings Entity.
 class SettingsModel {
   /// Creates a [SettingsModel].
   SettingsModel({
@@ -14,8 +10,8 @@ class SettingsModel {
     this.animationsEnabled = true,
   });
 
-  /// Isar single singleton settings record ID.
-  Id id;
+  /// Settings ID.
+  int id;
 
   /// Light mode flag.
   bool isLightMode;

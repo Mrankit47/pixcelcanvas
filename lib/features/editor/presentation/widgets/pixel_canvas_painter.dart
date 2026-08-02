@@ -40,7 +40,8 @@ class PixelCanvasPainter extends CustomPainter {
       for (var x = 0; x < engine.width; x++) {
         final pixel = engine.grid.compositeBuffer.getPixel(x, y);
         if (!pixel.isEmpty) {
-          paint.color = pixel.color.withValues(alpha: pixel.opacity * (pixel.color.a));
+          final clampedAlpha = (pixel.opacity * (pixel.color.a / 255.0)).clamp(0.0, 1.0);
+          paint.color = pixel.color.withOpacity(clampedAlpha);
           final rect = Rect.fromLTWH(x * cellSize, y * cellSize, cellSize, cellSize);
           canvas.drawRect(rect, paint);
         }
@@ -81,7 +82,7 @@ class PixelCanvasPainter extends CustomPainter {
     // 5. Draw Grid Lines
     if (showGrid) {
       final gridPaint = Paint()
-        ..color = AppColors.neutral200.withValues(alpha: 0.4)
+        ..color = AppColors.neutral200.withOpacity(0.4)
         ..style = PaintingStyle.stroke
         ..strokeWidth = 0.5;
 

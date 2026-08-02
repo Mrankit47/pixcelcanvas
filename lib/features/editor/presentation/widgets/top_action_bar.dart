@@ -59,7 +59,7 @@ class TopActionBar extends StatelessWidget implements PreferredSizeWidget {
           border: const Border(bottom: BorderSide(color: AppColors.border, width: 1.0)),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary700.withValues(alpha: 0.05),
+              color: AppColors.primary700.withOpacity(0.05),
               blurRadius: 10,
               offset: const Offset(0, 2),
             ),

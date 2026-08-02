@@ -1,12 +1,6 @@
-import 'package:isar/isar.dart';
 import 'package:pixelcanvas/features/projects/data/models/layer_model.dart';
 
-
-/// Isar Embedded Object for Canvas Entity per Blueprint §6.2 & §11.2.
-///
-/// **Purpose**: Embedded object within [ProjectModel] holding canvas dimensions and layer stack.
-/// **Mapped Entity**: [Canvas]
-@embedded
+/// Local Data Model for Canvas Entity.
 class CanvasModel {
   /// Creates a [CanvasModel].
   CanvasModel({

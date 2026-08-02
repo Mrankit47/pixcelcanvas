@@ -17,16 +17,8 @@ dependencies:
   # ── Navigation & Routing (Blueprint §7) ──
   go_router: ^14.2.0
 
-  # ── Local Database & Persistence (Blueprint §11.2) ──
-  isar: 3.1.0+1
-  isar_flutter_libs: 3.1.0+1
-
-  # ── Backend Integration (Blueprint §14) ──
-  supabase_flutter: ^2.6.0
-
   # ── Local Key-Value Storage (Blueprint §17.4) ──
   shared_preferences: ^2.3.0
-  flutter_secure_storage: ^9.2.2
 
   # ── Network & Connectivity (Blueprint §11.5) ──
   connectivity_plus: ^6.0.4
@@ -74,7 +66,6 @@ dev_dependencies:
   riverpod_generator: ^2.4.2
   freezed: ^2.5.2
   json_serializable: ^6.8.0
-  isar_generator: 3.1.0+1
 
   # ── Unit & Integration Testing (Blueprint §20) ──
   mocktail: ^1.0.4

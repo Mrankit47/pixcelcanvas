@@ -26,7 +26,7 @@ class FloatingCreateButton extends StatelessWidget {
           ),
           boxShadow: AppShadows.pixelGlow,
           border: Border.all(
-            color: AppColors.accentCyan.withValues(alpha: 0.6),
+            color: AppColors.accentCyan.withOpacity(0.6),
             width: 1.5,
           ),
         ),

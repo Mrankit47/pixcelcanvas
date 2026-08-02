@@ -1,10 +1,6 @@
-import 'package:isar/isar.dart';
-import 'package:pixelcanvas/core/database/isar_id_generator.dart';
 import 'package:pixelcanvas/features/palette/data/models/color_swatch_model.dart';
 
-
-/// Isar Local NoSQL Collection for Palette Entity per Blueprint §6.2.
-@collection
+/// Local Data Model for Palette Entity.
 class PaletteModel {
   /// Creates a [PaletteModel].
   PaletteModel({
@@ -14,11 +10,7 @@ class PaletteModel {
     this.isPreset = false,
   });
 
-  /// Isar primary key.
-  Id get id => fastHash(uuid);
-
   /// Unique UUID index.
-  @Index(unique: true, replace: true)
   String uuid;
 
   /// Palette name.

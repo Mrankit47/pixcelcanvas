@@ -60,9 +60,8 @@ class AnimationRenderer {
           continue;
         }
 
-        paint.color = px.color.withValues(
-          alpha: px.opacity * px.color.a,
-        );
+        final clampedAlpha = (px.opacity * (px.color.a / 255.0)).clamp(0.0, 1.0);
+        paint.color = px.color.withOpacity(clampedAlpha);
 
         canvas.drawRect(
           Rect.fromLTWH(screenX, screenY, cellSize, cellSize),

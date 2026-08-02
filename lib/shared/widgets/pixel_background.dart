@@ -21,8 +21,8 @@ class PixelBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) => CustomPaint(
         painter: _PixelGridPainter(
-          gridColor: AppColors.primary500.withValues(alpha: 0.04),
-          dotColor: AppColors.primary500.withValues(alpha: 0.08),
+          gridColor: AppColors.primary500.withOpacity(0.04),
+          dotColor: AppColors.primary500.withOpacity(0.08),
         ),
         child: Container(
           color: backgroundColor == AppColors.background

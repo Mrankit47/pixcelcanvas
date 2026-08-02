@@ -91,7 +91,7 @@ class _PixelButtonState extends State<PixelButton> {
               border: Border.all(
                 color: isSecondary
                     ? (_isHovered ? AppColors.primary500 : AppColors.border)
-                    : (isPrimary ? AppColors.primary300.withValues(alpha: 0.5) : Colors.transparent),
+                    : (isPrimary ? AppColors.primary300.withOpacity(0.5) : Colors.transparent),
                 width: 1.0,
               ),
               boxShadow: isPrimary && _isHovered

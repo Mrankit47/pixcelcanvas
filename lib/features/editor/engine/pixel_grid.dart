@@ -55,9 +55,8 @@ class PixelGrid {
           if (px.isEmpty) continue;
 
           final layerOpacity = layer.opacity;
-          final pixelColor = px.color.withValues(
-            alpha: px.opacity * layerOpacity * px.color.a,
-          );
+          final clampedAlpha = (px.opacity * layerOpacity * (px.color.a / 255.0)).clamp(0.0, 1.0);
+          final pixelColor = px.color.withOpacity(clampedAlpha);
 
           if (composited == Colors.transparent) {
             composited = pixelColor;

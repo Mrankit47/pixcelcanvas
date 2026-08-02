@@ -28,7 +28,7 @@ class PixelLogoWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(size * 0.22),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary500.withValues(alpha: 0.35),
+                  color: AppColors.primary500.withOpacity(0.35),
                   blurRadius: size * 0.25,
                   offset: Offset(0, size * 0.1),
                 ),
@@ -98,7 +98,7 @@ class _MiniCanvasPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.15)
+      ..color = Colors.white.withOpacity(0.15)
       ..strokeWidth = 1.0;
 
     const step = 8.0;

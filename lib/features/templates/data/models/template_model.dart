@@ -1,9 +1,4 @@
-import 'package:isar/isar.dart';
-import 'package:pixelcanvas/core/database/isar_id_generator.dart';
-
-
-/// Isar Local NoSQL Collection for Template Entity per Blueprint §6.2.
-@collection
+/// Local Data Model for Template Entity.
 class TemplateModel {
   /// Creates a [TemplateModel].
   TemplateModel({
@@ -18,18 +13,13 @@ class TemplateModel {
     this.isFavorite = false,
   });
 
-  /// Isar primary key.
-  Id get id => fastHash(uuid);
-
   /// Unique UUID index.
-  @Index(unique: true, replace: true)
   String uuid;
 
   /// Template title.
   String name;
 
   /// Category index.
-  @Index()
   String category;
 
   /// Width pixels.

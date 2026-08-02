@@ -1,11 +1,4 @@
-import 'package:isar/isar.dart';
-
-
-/// Isar Embedded Object for Layer Entity per Blueprint §6.2 & §11.2.
-///
-/// **Purpose**: Embedded object within [CanvasModel] representing a canvas layer.
-/// **Mapped Entity**: [Layer]
-@embedded
+/// Local Data Model for Layer Entity.
 class LayerModel {
   /// Creates a [LayerModel].
   LayerModel({
