@@ -1,7 +1,6 @@
-import 'package:pixelcanvas/core/database/database_service.dart';
 import 'package:pixelcanvas/features/settings/data/models/settings_model.dart';
 
-/// Contract for local settings database operations per Blueprint §6.2.
+/// Contract for local settings database operations.
 abstract interface class SettingsLocalDataSource {
   /// Gets saved settings model or default.
   Future<SettingsModel> getSettings();
@@ -10,34 +9,21 @@ abstract interface class SettingsLocalDataSource {
   Future<void> saveSettings(SettingsModel settings);
 }
 
-/// Isar Implementation of [SettingsLocalDataSource].
+/// Pure in-memory implementation of [SettingsLocalDataSource].
 class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
   /// Creates a [SettingsLocalDataSourceImpl].
-  SettingsLocalDataSourceImpl(this._dbService);
+  SettingsLocalDataSourceImpl(dynamic dbService);
 
-  final DatabaseService _dbService;
-  SettingsModel? _inMemorySettings;
+  SettingsModel? _settings;
 
   @override
   Future<SettingsModel> getSettings() async {
-    final isar = _dbService.isar;
-    if (isar != null) {
-      final model = await isar.collection<SettingsModel>().get(1);
-      return model ?? SettingsModel();
-    }
-    return _inMemorySettings ?? SettingsModel();
+    return _settings ?? SettingsModel();
   }
 
   @override
   Future<void> saveSettings(SettingsModel settings) async {
     settings.id = 1;
-    final isar = _dbService.isar;
-    if (isar != null) {
-      await isar.writeTxn(() async {
-        await isar.collection<SettingsModel>().put(settings);
-      });
-    } else {
-      _inMemorySettings = settings;
-    }
+    _settings = settings;
   }
 }

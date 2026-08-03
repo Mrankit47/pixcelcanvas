@@ -1,7 +1,6 @@
-import 'package:pixelcanvas/core/database/database_service.dart';
 import 'package:pixelcanvas/features/templates/data/models/template_model.dart';
 
-/// Contract for local template database operations per Blueprint §6.2.
+/// Contract for local template database operations.
 abstract interface class TemplateLocalDataSource {
   /// Gets all templates.
   Future<List<TemplateModel>> getTemplates();
@@ -13,28 +12,22 @@ abstract interface class TemplateLocalDataSource {
   Future<void> saveTemplate(TemplateModel template);
 }
 
-/// Isar Implementation of [TemplateLocalDataSource].
+/// Pure in-memory implementation of [TemplateLocalDataSource].
 class TemplateLocalDataSourceImpl implements TemplateLocalDataSource {
   /// Creates a [TemplateLocalDataSourceImpl].
-  TemplateLocalDataSourceImpl(this._dbService);
+  TemplateLocalDataSourceImpl(dynamic dbService);
 
-  final DatabaseService _dbService;
-  final List<TemplateModel> _inMemoryTemplates = [];
+  final List<TemplateModel> _templates = [];
 
   @override
   Future<List<TemplateModel>> getTemplates() async {
-    final isar = _dbService.isar;
-    if (isar != null) {
-      return isar.collection<TemplateModel>().where().findAll();
-    }
-    return _inMemoryTemplates;
+    return List<TemplateModel>.from(_templates);
   }
 
   @override
   Future<TemplateModel?> getTemplateByUuid(String uuid) async {
-    final list = await getTemplates();
     try {
-      return list.firstWhere((t) => t.uuid == uuid);
+      return _templates.firstWhere((t) => t.uuid == uuid);
     } catch (_) {
       return null;
     }
@@ -42,14 +35,7 @@ class TemplateLocalDataSourceImpl implements TemplateLocalDataSource {
 
   @override
   Future<void> saveTemplate(TemplateModel template) async {
-    final isar = _dbService.isar;
-    if (isar != null) {
-      await isar.writeTxn(() async {
-        await isar.collection<TemplateModel>().put(template);
-      });
-    } else {
-      _inMemoryTemplates.removeWhere((t) => t.uuid == template.uuid);
-      _inMemoryTemplates.add(template);
-    }
+    _templates.removeWhere((t) => t.uuid == template.uuid);
+    _templates.add(template);
   }
 }

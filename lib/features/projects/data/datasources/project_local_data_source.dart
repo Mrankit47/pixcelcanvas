@@ -1,8 +1,6 @@
-import 'package:pixelcanvas/core/database/database_service.dart';
-import 'package:pixelcanvas/core/database/isar_id_generator.dart';
 import 'package:pixelcanvas/features/projects/data/models/project_model.dart';
 
-/// Contract for local project database operations per Blueprint §6.2 & §11.2.
+/// Contract for local project database operations.
 abstract interface class ProjectLocalDataSource {
   /// Gets all saved projects.
   Future<List<ProjectModel>> getProjects();
@@ -17,40 +15,24 @@ abstract interface class ProjectLocalDataSource {
   Future<void> deleteProject(String uuid);
 }
 
-/// Isar Implementation of [ProjectLocalDataSource].
+/// Pure in-memory implementation of [ProjectLocalDataSource].
 class ProjectLocalDataSourceImpl implements ProjectLocalDataSource {
   /// Creates a [ProjectLocalDataSourceImpl].
-  ProjectLocalDataSourceImpl(this._dbService);
+  ProjectLocalDataSourceImpl(dynamic dbService);
 
-  final DatabaseService _dbService;
-  final List<ProjectModel> _inMemoryProjects = [];
+  final List<ProjectModel> _projects = [];
 
   @override
   Future<List<ProjectModel>> getProjects() async {
-    final isar = _dbService.isar;
-    if (isar != null) {
-      final list = await isar.collection<ProjectModel>().where().findAll();
-      list.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
-      return list;
-    }
-    final list = List<ProjectModel>.from(_inMemoryProjects);
+    final list = List<ProjectModel>.from(_projects);
     list.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
     return list;
   }
 
   @override
   Future<ProjectModel?> getProjectByUuid(String uuid) async {
-    final isar = _dbService.isar;
-    if (isar != null) {
-      final list = await isar.collection<ProjectModel>().where().findAll();
-      try {
-        return list.firstWhere((p) => p.uuid == uuid);
-      } catch (_) {
-        return null;
-      }
-    }
     try {
-      return _inMemoryProjects.firstWhere((p) => p.uuid == uuid);
+      return _projects.firstWhere((p) => p.uuid == uuid);
     } catch (_) {
       return null;
     }
@@ -58,26 +40,12 @@ class ProjectLocalDataSourceImpl implements ProjectLocalDataSource {
 
   @override
   Future<void> saveProject(ProjectModel project) async {
-    final isar = _dbService.isar;
-    if (isar != null) {
-      await isar.writeTxn(() async {
-        await isar.collection<ProjectModel>().put(project);
-      });
-    } else {
-      _inMemoryProjects.removeWhere((p) => p.uuid == project.uuid);
-      _inMemoryProjects.add(project);
-    }
+    _projects.removeWhere((p) => p.uuid == project.uuid);
+    _projects.add(project);
   }
 
   @override
   Future<void> deleteProject(String uuid) async {
-    final isar = _dbService.isar;
-    if (isar != null) {
-      await isar.writeTxn(() async {
-        await isar.collection<ProjectModel>().delete(fastHash(uuid));
-      });
-    } else {
-      _inMemoryProjects.removeWhere((p) => p.uuid == uuid);
-    }
+    _projects.removeWhere((p) => p.uuid == uuid);
   }
 }

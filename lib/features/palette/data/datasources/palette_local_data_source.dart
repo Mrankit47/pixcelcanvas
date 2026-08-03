@@ -1,7 +1,6 @@
-import 'package:pixelcanvas/core/database/database_service.dart';
 import 'package:pixelcanvas/features/palette/data/models/palette_model.dart';
 
-/// Contract for local color palette database operations per Blueprint §6.2.
+/// Contract for local color palette database operations.
 abstract interface class PaletteLocalDataSource {
   /// Gets all saved color palettes.
   Future<List<PaletteModel>> getPalettes();
@@ -10,32 +9,21 @@ abstract interface class PaletteLocalDataSource {
   Future<void> savePalette(PaletteModel palette);
 }
 
-/// Isar Implementation of [PaletteLocalDataSource].
+/// Pure in-memory implementation of [PaletteLocalDataSource].
 class PaletteLocalDataSourceImpl implements PaletteLocalDataSource {
   /// Creates a [PaletteLocalDataSourceImpl].
-  PaletteLocalDataSourceImpl(this._dbService);
+  PaletteLocalDataSourceImpl(dynamic dbService);
 
-  final DatabaseService _dbService;
-  final List<PaletteModel> _inMemoryPalettes = [];
+  final List<PaletteModel> _palettes = [];
 
   @override
   Future<List<PaletteModel>> getPalettes() async {
-    final isar = _dbService.isar;
-    if (isar != null) {
-      return isar.collection<PaletteModel>().where().findAll();
-    }
-    return _inMemoryPalettes;
+    return List<PaletteModel>.from(_palettes);
   }
 
   @override
   Future<void> savePalette(PaletteModel palette) async {
-    final isar = _dbService.isar;
-    if (isar != null) {
-      await isar.writeTxn(() async {
-        await isar.collection<PaletteModel>().put(palette);
-      });
-    } else {
-      _inMemoryPalettes.add(palette);
-    }
+    _palettes.removeWhere((p) => p.uuid == palette.uuid);
+    _palettes.add(palette);
   }
 }
