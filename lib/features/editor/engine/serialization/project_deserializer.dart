@@ -36,12 +36,12 @@ class ProjectDeserializer {
         for (var i = 0; i < layersList.length; i++) {
           final lMap = layersList[i] as Map<String, dynamic>;
           final layer = LayerBuffer(
-            id: lMap['id'] ?? 'layer_$i',
-            name: lMap['name'] ?? 'Layer $i',
+            id: (lMap['id'] as String?) ?? 'layer_$i',
+            name: (lMap['name'] as String?) ?? 'Layer $i',
             width: width,
             height: height,
-            isVisible: lMap['isVisible'] ?? true,
-            isLocked: lMap['isLocked'] ?? false,
+            isVisible: (lMap['isVisible'] as bool?) ?? true,
+            isLocked: (lMap['isLocked'] as bool?) ?? false,
             opacity: (lMap['opacity'] as num?)?.toDouble() ?? 1.0,
           );
 
@@ -73,7 +73,7 @@ class ProjectDeserializer {
       if (decoded.containsKey('brushSettings')) {
         final bMap = decoded['brushSettings'] as Map<String, dynamic>;
         engine.brushSettings = BrushSettings(
-          size: bMap['size'] ?? 1,
+          size: (bMap['size'] as int?) ?? 1,
           opacity: (bMap['opacity'] as num?)?.toDouble() ?? 1.0,
         );
       }
@@ -81,7 +81,7 @@ class ProjectDeserializer {
       if (decoded.containsKey('eraserSettings')) {
         final eMap = decoded['eraserSettings'] as Map<String, dynamic>;
         engine.eraserSettings = EraserSettings(
-          size: eMap['size'] ?? 1,
+          size: (eMap['size'] as int?) ?? 1,
           opacity: (eMap['opacity'] as num?)?.toDouble() ?? 1.0,
         );
       }
@@ -89,8 +89,8 @@ class ProjectDeserializer {
       if (decoded.containsKey('fillSettings')) {
         final fMap = decoded['fillSettings'] as Map<String, dynamic>;
         engine.fillSettings = FillSettings(
-          tolerance: fMap['tolerance'] ?? 0,
-          contiguous: fMap['contiguous'] ?? true,
+          tolerance: (fMap['tolerance'] as int?) ?? 0,
+          contiguous: (fMap['contiguous'] as bool?) ?? true,
         );
       }
 
@@ -98,26 +98,26 @@ class ProjectDeserializer {
       if (decoded.containsKey('spriteSheet') && decoded['spriteSheet'] != null) {
         final sMap = decoded['spriteSheet'] as Map<String, dynamic>;
         final sheet = SpriteSheet(
-          id: sMap['id'] ?? 'sheet_0',
-          name: sMap['name'] ?? 'SpriteSheet',
-          width: sMap['width'] ?? width,
-          height: sMap['height'] ?? height,
-          activeFrameIndex: sMap['activeFrameIndex'] ?? 0,
+          id: (sMap['id'] as String?) ?? 'sheet_0',
+          name: (sMap['name'] as String?) ?? 'SpriteSheet',
+          width: (sMap['width'] as int?) ?? width,
+          height: (sMap['height'] as int?) ?? height,
+          activeFrameIndex: (sMap['activeFrameIndex'] as int?) ?? 0,
         );
 
         if (sMap.containsKey('frames') && sMap['frames'] is List) {
           final fList = sMap['frames'] as List;
           for (final fMap in fList) {
             if (fMap is Map<String, dynamic>) {
-              final fW = fMap['width'] ?? 32;
-              final fH = fMap['height'] ?? 32;
+              final fW = (fMap['width'] as int?) ?? 32;
+              final fH = (fMap['height'] as int?) ?? 32;
               final bMap = fMap['bounds'] as Map<String, dynamic>? ?? {};
 
               final bounds = SelectionBounds(
-                left: bMap['left'] ?? 0,
-                top: bMap['top'] ?? 0,
-                right: bMap['right'] ?? fW,
-                bottom: bMap['bottom'] ?? fH,
+                left: (bMap['left'] as int?) ?? 0,
+                top: (bMap['top'] as int?) ?? 0,
+                right: (bMap['right'] as int?) ?? fW,
+                bottom: (bMap['bottom'] as int?) ?? fH,
               );
 
               final fPixels = List<Pixel>.filled(fW * fH, Pixel.empty);
@@ -133,8 +133,8 @@ class ProjectDeserializer {
 
               final sFrame = SpriteFrame(
                 metadata: FrameMetadata(
-                  id: fMap['id'] ?? 'frame_0',
-                  name: fMap['name'] ?? 'Frame_0',
+                  id: (fMap['id'] as String?) ?? 'frame_0',
+                  name: (fMap['name'] as String?) ?? 'Frame_0',
                   width: fW,
                   height: fH,
                 ),
@@ -181,19 +181,19 @@ class ProjectDeserializer {
               for (final fMap in aList) {
                 if (fMap is Map<String, dynamic>) {
                   aFrames.add(AnimationFrame(
-                    id: fMap['id'] ?? 'a_frame_0',
-                    spriteFrameId: fMap['spriteFrameId'],
-                    durationMs: fMap['durationMs'] ?? 100,
-                    fpsOverride: fMap['fpsOverride'],
+                    id: (fMap['id'] as String?) ?? 'a_frame_0',
+                    spriteFrameId: fMap['spriteFrameId'] as String?,
+                    durationMs: (fMap['durationMs'] as int?) ?? 100,
+                    fpsOverride: fMap['fpsOverride'] as int?,
                   ));
                 }
               }
             }
 
             engine.animationEngine.timeline.clips.add(AnimationClip(
-              id: cId,
-              name: cName,
-              fps: cFps,
+              id: cId as String,
+              name: cName as String,
+              fps: cFps as int,
               loopMode: loopMode,
               playbackSpeed: cSpeed,
               frames: aFrames,

@@ -54,16 +54,16 @@ class GeneralSettings extends Equatable {
       };
 
   factory GeneralSettings.fromJson(Map<String, dynamic> json) => GeneralSettings(
-        language: json['language'] ?? 'en',
+        language: (json['language'] as String?) ?? 'en',
         themeMode: AppThemeMode.values.firstWhere(
           (m) => m.name == json['themeMode'],
           orElse: () => AppThemeMode.dark,
         ),
-        accentColorHex: json['accentColorHex'] ?? '#6C5CE7',
-        startupPage: json['startupPage'] ?? 'dashboard',
-        recentProjectsCount: json['recentProjectsCount'] ?? 10,
-        defaultProjectFolder: json['defaultProjectFolder'] ?? '/projects',
-        confirmBeforeExit: json['confirmBeforeExit'] ?? true,
+        accentColorHex: (json['accentColorHex'] as String?) ?? '#6C5CE7',
+        startupPage: (json['startupPage'] as String?) ?? 'dashboard',
+        recentProjectsCount: (json['recentProjectsCount'] as int?) ?? 10,
+        defaultProjectFolder: (json['defaultProjectFolder'] as String?) ?? '/projects',
+        confirmBeforeExit: (json['confirmBeforeExit'] as bool?) ?? true,
       );
 
   @override

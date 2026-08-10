@@ -36,10 +36,10 @@ class PerformanceSettings extends Equatable {
       };
 
   factory PerformanceSettings.fromJson(Map<String, dynamic> json) => PerformanceSettings(
-        thumbnailCacheLimitMb: json['thumbnailCacheLimitMb'] ?? 64,
-        memoryCacheLimitMb: json['memoryCacheLimitMb'] ?? 256,
-        maxAnimationFps: json['maxAnimationFps'] ?? 60,
-        enableHardwareAcceleration: json['enableHardwareAcceleration'] ?? true,
+        thumbnailCacheLimitMb: (json['thumbnailCacheLimitMb'] as int?) ?? 64,
+        memoryCacheLimitMb: (json['memoryCacheLimitMb'] as int?) ?? 256,
+        maxAnimationFps: (json['maxAnimationFps'] as int?) ?? 60,
+        enableHardwareAcceleration: (json['enableHardwareAcceleration'] as bool?) ?? true,
       );
 
   @override

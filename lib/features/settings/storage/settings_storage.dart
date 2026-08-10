@@ -19,7 +19,7 @@ class SettingsStorage {
   static Future<SettingsProfile> loadProfile() async {
     if (_persistedJson != null && _persistedJson!.isNotEmpty) {
       try {
-        final map = json.decode(_persistedJson!);
+        final map = json.decode(_persistedJson!) as Map<String, dynamic>;
         return SettingsProfile.fromJson(map);
       } catch (_) {}
     }

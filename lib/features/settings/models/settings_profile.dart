@@ -62,25 +62,25 @@ class SettingsProfile extends Equatable {
       };
 
   factory SettingsProfile.fromJson(Map<String, dynamic> json) => SettingsProfile(
-        id: json['id'] ?? 'default',
-        name: json['name'] ?? 'Default Profile',
-        general: json.containsKey('general')
-            ? GeneralSettings.fromJson(json['general'])
+        id: (json['id'] as String?) ?? 'default',
+        name: (json['name'] as String?) ?? 'Default Profile',
+        general: json.containsKey('general') && json['general'] is Map<String, dynamic>
+            ? GeneralSettings.fromJson(json['general'] as Map<String, dynamic>)
             : const GeneralSettings(),
-        appearance: json.containsKey('appearance')
-            ? AppearanceSettings.fromJson(json['appearance'])
+        appearance: json.containsKey('appearance') && json['appearance'] is Map<String, dynamic>
+            ? AppearanceSettings.fromJson(json['appearance'] as Map<String, dynamic>)
             : const AppearanceSettings(),
-        editor: json.containsKey('editor')
-            ? EditorSettings.fromJson(json['editor'])
+        editor: json.containsKey('editor') && json['editor'] is Map<String, dynamic>
+            ? EditorSettings.fromJson(json['editor'] as Map<String, dynamic>)
             : const EditorSettings(),
-        performance: json.containsKey('performance')
-            ? PerformanceSettings.fromJson(json['performance'])
+        performance: json.containsKey('performance') && json['performance'] is Map<String, dynamic>
+            ? PerformanceSettings.fromJson(json['performance'] as Map<String, dynamic>)
             : const PerformanceSettings(),
-        autosave: json.containsKey('autosave')
-            ? AutosaveSettings.fromJson(json['autosave'])
+        autosave: json.containsKey('autosave') && json['autosave'] is Map<String, dynamic>
+            ? AutosaveSettings.fromJson(json['autosave'] as Map<String, dynamic>)
             : const AutosaveSettings(),
         shortcuts: json.containsKey('shortcuts') && json['shortcuts'] is List
-            ? (json['shortcuts'] as List).map((s) => ShortcutBinding.fromJson(s)).toList()
+            ? (json['shortcuts'] as List).map((s) => ShortcutBinding.fromJson(s as Map<String, dynamic>)).toList()
             : ShortcutBinding.defaultBindings,
       );
 

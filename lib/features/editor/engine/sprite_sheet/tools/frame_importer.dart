@@ -60,13 +60,13 @@ class FrameImporter {
             final item = framesList[i];
             if (item is Map<String, dynamic>) {
               metadatas.add(FrameMetadata(
-                id: item['id'] ?? 'frame_$i',
-                name: item['name'] ?? 'Frame_$i',
-                width: item['width'] ?? 32,
-                height: item['height'] ?? 32,
-                originX: item['originX'] ?? 0,
-                originY: item['originY'] ?? 0,
-                durationMs: item['durationMs'] ?? 100,
+                id: (item['id'] as String?) ?? 'frame_$i',
+                name: (item['name'] as String?) ?? 'Frame_$i',
+                width: (item['width'] as int?) ?? 32,
+                height: (item['height'] as int?) ?? 32,
+                originX: (item['originX'] as int?) ?? 0,
+                originY: (item['originY'] as int?) ?? 0,
+                durationMs: (item['durationMs'] as int?) ?? 100,
               ));
             }
           }
