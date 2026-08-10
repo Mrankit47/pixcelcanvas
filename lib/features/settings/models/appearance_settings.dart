@@ -42,10 +42,10 @@ class AppearanceSettings extends Equatable {
 
   factory AppearanceSettings.fromJson(Map<String, dynamic> json) => AppearanceSettings(
         uiScale: (json['uiScale'] as num?)?.toDouble() ?? 1.0,
-        compactMode: json['compactMode'] ?? false,
+        compactMode: (json['compactMode'] as bool?) ?? false,
         sidebarWidth: (json['sidebarWidth'] as num?)?.toDouble() ?? 280.0,
-        showStatusBar: json['showStatusBar'] ?? true,
-        enableAnimations: json['enableAnimations'] ?? true,
+        showStatusBar: (json['showStatusBar'] as bool?) ?? true,
+        enableAnimations: (json['enableAnimations'] as bool?) ?? true,
       );
 
   @override

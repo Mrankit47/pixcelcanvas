@@ -29,19 +29,19 @@ class AnimationImporter {
             final item = framesList[i];
             if (item is Map<String, dynamic>) {
               frames.add(AnimationFrame(
-                id: item['id'] ?? 'frame_$i',
-                spriteFrameId: item['spriteFrameId'],
-                durationMs: item['durationMs'] ?? 100,
-                fpsOverride: item['fpsOverride'],
+                id: (item['id'] as String?) ?? 'frame_$i',
+                spriteFrameId: item['spriteFrameId'] as String?,
+                durationMs: (item['durationMs'] as int?) ?? 100,
+                fpsOverride: item['fpsOverride'] as int?,
               ));
             }
           }
         }
 
         return AnimationClip(
-          id: id,
-          name: name,
-          fps: fps,
+          id: id as String,
+          name: name as String,
+          fps: fps as int,
           loopMode: loopMode,
           playbackSpeed: speed,
           frames: frames,

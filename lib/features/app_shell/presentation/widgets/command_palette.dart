@@ -68,7 +68,7 @@ class _CommandPaletteState extends State<CommandPalette> {
       child: Center(
         child: Container(
           width: 550,
-          maxHeight: 400,
+          constraints: const BoxConstraints(maxHeight: 400),
           margin: const EdgeInsets.symmetric(horizontal: 24),
           decoration: BoxDecoration(
             color: const Color(0xFF1E1E2E),

@@ -119,20 +119,20 @@ class ProjectMetadata extends Equatable {
 
   /// Factory constructor from JSON map.
   factory ProjectMetadata.fromJson(Map<String, dynamic> json) => ProjectMetadata(
-        id: json['id'] ?? '',
-        name: json['name'] ?? 'Untitled',
-        filePath: json['filePath'] ?? '',
-        width: json['width'] ?? 32,
-        height: json['height'] ?? 32,
-        createdDate: DateTime.parse(json['createdDate'] ?? DateTime.now().toIso8601String()),
-        modifiedDate: DateTime.parse(json['modifiedDate'] ?? DateTime.now().toIso8601String()),
-        lastOpened: DateTime.parse(json['lastOpened'] ?? DateTime.now().toIso8601String()),
+        id: (json['id'] as String?) ?? '',
+        name: (json['name'] as String?) ?? 'Untitled',
+        filePath: (json['filePath'] as String?) ?? '',
+        width: (json['width'] as int?) ?? 32,
+        height: (json['height'] as int?) ?? 32,
+        createdDate: DateTime.parse((json['createdDate'] as String?) ?? DateTime.now().toIso8601String()),
+        modifiedDate: DateTime.parse((json['modifiedDate'] as String?) ?? DateTime.now().toIso8601String()),
+        lastOpened: DateTime.parse((json['lastOpened'] as String?) ?? DateTime.now().toIso8601String()),
         tags: (json['tags'] as List?)?.cast<String>() ?? const [],
-        isFavorite: json['isFavorite'] ?? false,
-        isArchived: json['isArchived'] ?? false,
-        isPinned: json['isPinned'] ?? false,
-        backgroundColorHex: json['backgroundColorHex'] ?? '#00000000',
-        previewPngBase64: json['previewPngBase64'],
+        isFavorite: (json['isFavorite'] as bool?) ?? false,
+        isArchived: (json['isArchived'] as bool?) ?? false,
+        isPinned: (json['isPinned'] as bool?) ?? false,
+        backgroundColorHex: (json['backgroundColorHex'] as String?) ?? '#00000000',
+        previewPngBase64: json['previewPngBase64'] as String?,
       );
 
   @override

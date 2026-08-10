@@ -57,13 +57,13 @@ class EditorSettings extends Equatable {
 
   factory EditorSettings.fromJson(Map<String, dynamic> json) => EditorSettings(
         defaultZoom: (json['defaultZoom'] as num?)?.toDouble() ?? 1.0,
-        showGrid: json['showGrid'] ?? true,
-        gridSize: json['gridSize'] ?? 16,
-        gridColorHex: json['gridColorHex'] ?? '#3A3A4D',
-        selectionColorHex: json['selectionColorHex'] ?? '#6C5CE7',
-        snapToGrid: json['snapToGrid'] ?? false,
-        defaultTool: json['defaultTool'] ?? 'Brush',
-        undoHistoryLimit: json['undoHistoryLimit'] ?? 50,
+        showGrid: (json['showGrid'] as bool?) ?? true,
+        gridSize: (json['gridSize'] as int?) ?? 16,
+        gridColorHex: (json['gridColorHex'] as String?) ?? '#3A3A4D',
+        selectionColorHex: (json['selectionColorHex'] as String?) ?? '#6C5CE7',
+        snapToGrid: (json['snapToGrid'] as bool?) ?? false,
+        defaultTool: (json['defaultTool'] as String?) ?? 'Brush',
+        undoHistoryLimit: (json['undoHistoryLimit'] as int?) ?? 50,
       );
 
   @override

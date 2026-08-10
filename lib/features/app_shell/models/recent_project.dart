@@ -42,12 +42,12 @@ class RecentProject extends Equatable {
 
   /// Factory constructor from JSON map.
   factory RecentProject.fromJson(Map<String, dynamic> json) => RecentProject(
-        id: json['id'] ?? '',
-        name: json['name'] ?? 'Untitled',
-        filePath: json['filePath'] ?? '',
-        lastOpened: DateTime.parse(json['lastOpened'] ?? DateTime.now().toIso8601String()),
-        width: json['width'] ?? 32,
-        height: json['height'] ?? 32,
+        id: (json['id'] as String?) ?? '',
+        name: (json['name'] as String?) ?? 'Untitled',
+        filePath: (json['filePath'] as String?) ?? '',
+        lastOpened: DateTime.parse((json['lastOpened'] as String?) ?? DateTime.now().toIso8601String()),
+        width: (json['width'] as int?) ?? 32,
+        height: (json['height'] as int?) ?? 32,
       );
 
   @override

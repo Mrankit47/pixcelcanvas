@@ -48,14 +48,14 @@ class ShortcutBinding extends Equatable {
       };
 
   factory ShortcutBinding.fromJson(Map<String, dynamic> json) => ShortcutBinding(
-        actionId: json['actionId'] ?? '',
-        actionName: json['actionName'] ?? '',
+        actionId: (json['actionId'] as String?) ?? '',
+        actionName: (json['actionName'] as String?) ?? '',
         category: ShortcutCategory.values.firstWhere(
           (c) => c.name == json['category'],
           orElse: () => ShortcutCategory.application,
         ),
-        defaultKeyCombo: json['defaultKeyCombo'] ?? '',
-        customKeyCombo: json['customKeyCombo'],
+        defaultKeyCombo: (json['defaultKeyCombo'] as String?) ?? '',
+        customKeyCombo: json['customKeyCombo'] as String?,
       );
 
   /// Default application shortcut bindings.

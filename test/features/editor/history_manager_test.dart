@@ -24,7 +24,7 @@ void main() {
     test('History stack limits capacity to maxLimit', () {
       final engine = CanvasEngine(width: 8, height: 8);
       for (var i = 0; i < 60; i++) {
-        engine.createLayer(name: 'Layer $i');
+        engine.createLayer();
       }
 
       expect(engine.historyManager.undoCount, lessThanOrEqualTo(50));

@@ -36,10 +36,10 @@ class AutosaveSettings extends Equatable {
       };
 
   factory AutosaveSettings.fromJson(Map<String, dynamic> json) => AutosaveSettings(
-        enableAutosave: json['enableAutosave'] ?? true,
-        intervalMinutes: json['intervalMinutes'] ?? 5,
-        maxBackupFiles: json['maxBackupFiles'] ?? 10,
-        restoreLastSession: json['restoreLastSession'] ?? true,
+        enableAutosave: (json['enableAutosave'] as bool?) ?? true,
+        intervalMinutes: (json['intervalMinutes'] as int?) ?? 5,
+        maxBackupFiles: (json['maxBackupFiles'] as int?) ?? 10,
+        restoreLastSession: (json['restoreLastSession'] as bool?) ?? true,
       );
 
   @override

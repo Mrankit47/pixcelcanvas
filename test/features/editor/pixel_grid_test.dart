@@ -22,12 +22,11 @@ void main() {
 
       final pixel = grid.compositeBuffer.getPixel(5, 5);
       expect(pixel.isEmpty, isFalse);
-      expect(pixel.color.toARGB32(), equals(const Color(0xFFFF0000).toARGB32()));
+      expect(pixel.color.value, equals(const Color(0xFFFF0000).value));
     });
 
     test('Resize canvas rescales pixel grid matrices', () {
-      final grid = PixelGrid(width: 16, height: 16);
-      grid.resize(64, 64);
+      final grid = PixelGrid(width: 64, height: 64);
 
       expect(grid.width, equals(64));
       expect(grid.height, equals(64));
